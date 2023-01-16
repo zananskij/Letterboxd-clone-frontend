@@ -4,7 +4,7 @@ import { MagnifyingGlassIcon } from "@heroicons/react/24/outline"
 import { UserIcon } from "@heroicons/react/24/outline"
 
 const Header = () => {
-  // updating scroll states
+  // updating scroll state
   const [scroll, setScroll] = useState(false)
 
   useEffect(() => {
