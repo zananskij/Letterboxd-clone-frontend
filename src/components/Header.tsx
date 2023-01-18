@@ -23,7 +23,7 @@ const Header = () => {
   }, [])
   return (
     <header className={`${scroll && "bg-red-500"}`}>
-      <div className="flex items-center space-x-2 md:space-x-10">
+      <div className="flex justify-between space-x-2 md:space-x-10">
         {/* <img src="#"/> */}
         <ul className="space-x-4 md:flex">
           {/* make UL hamburger drop or popout on mobile */}
@@ -33,13 +33,12 @@ const Header = () => {
           <li className="headerLink">Trending</li>
           <li className="headerLink">My List</li>
         </ul>
-      </div>
-
-      <div className="flex items-center space-x-4 text-sm">
-        <MagnifyingGlassIcon className="hidden h-5 w-5 sm:inline text-white" />
-        <Link to="/profile">
-          <UserIcon className="h-5 w-5 text-white" />
-        </Link>
+        <div className="flex justify-end space-x-4 text-sm">
+          <MagnifyingGlassIcon className="hidden h-5 w-5 sm:inline text-white" />
+          <Link to="/profile">
+            <UserIcon className="h-5 w-5 text-white" />
+          </Link>
+        </div>
       </div>
     </header>
   )
