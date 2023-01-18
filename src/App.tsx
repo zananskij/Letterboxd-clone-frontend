@@ -87,6 +87,7 @@ import { MovieData } from "./results"
 // }
 
 const App = () => {
+  // combined multiple setCategory into single setData state
   const [data, setData] = useState<MovieData>({
     trending: { page: 0, results: [] },
     netflixOriginals: { page: 0, results: [] },
