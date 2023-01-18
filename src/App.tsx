@@ -5,92 +5,92 @@ import { Route, Routes, Link } from "react-router-dom"
 import Header from "./components/Header"
 import Row from "./components/Row"
 import "./App.css"
-import RowTitle from "./components/RowTitle"
-interface Trending {
-  trending: {
-    page: number
-    results: Array<{
-      adult: boolean
-      backdrop_path: string
-      first_air_date?: string
-      release_date?: string
-      video?: boolean
-      genre_ids: number[]
-      id: number
-      media_type: string
-      name?: string
-      title?: string
-      origin_country: string[]
-      original_language: string
-      original_name: string
-      original_title?: string
-      overview: string
-      popularity: number
-      poster_path: string
-      vote_average: number
-      vote_count: number
-    }>
-  }
-}
-interface netflixOriginals {
-  netflixOriginals: {
-    page: number
-    results: Array<{
-      adult: boolean
-      backdrop_path: string
-      first_air_date?: string
-      release_date?: string
-      video?: boolean
-      genre_ids: number[]
-      id: number
-      media_type: string
-      name?: string
-      title?: string
-      origin_country: string[]
-      original_language: string
-      original_name: string
-      original_title?: string
-      overview: string
-      popularity: number
-      poster_path: string
-      vote_average: number
-      vote_count: number
-    }>
-  }
-}
-interface Horror {
-  horror: {
-    page: number
-    results: Array<{
-      adult: boolean
-      backdrop_path: string
-      first_air_date?: string
-      release_date?: string
-      video?: boolean
-      genre_ids: number[]
-      id: number
-      media_type: string
-      name?: string
-      title?: string
-      origin_country: string[]
-      original_language: string
-      original_name: string
-      original_title?: string
-      overview: string
-      popularity: number
-      poster_path: string
-      vote_average: number
-      vote_count: number
-    }>
-  }
-}
+import { MovieData } from "./results"
+
+// interface Trending {
+//   trending: {
+//     page: number
+//     results: Array<{
+//       adult: boolean
+//       backdrop_path: string
+//       first_air_date?: string
+//       release_date?: string
+//       video?: boolean
+//       genre_ids: number[]
+//       id: number
+//       media_type: string
+//       name?: string
+//       title?: string
+//       origin_country: string[]
+//       original_language: string
+//       original_name: string
+//       original_title?: string
+//       overview: string
+//       popularity: number
+//       poster_path: string
+//       vote_average: number
+//       vote_count: number
+//     }>
+//   }
+// }
+// interface netflixOriginals {
+//   netflixOriginals: {
+//     page: number
+//     results: Array<{
+//       adult: boolean
+//       backdrop_path: string
+//       first_air_date?: string
+//       release_date?: string
+//       video?: boolean
+//       genre_ids: number[]
+//       id: number
+//       media_type: string
+//       name?: string
+//       title?: string
+//       origin_country: string[]
+//       original_language: string
+//       original_name: string
+//       original_title?: string
+//       overview: string
+//       popularity: number
+//       poster_path: string
+//       vote_average: number
+//       vote_count: number
+//     }>
+//   }
+// }
+// interface Horror {
+//   horror: {
+//     page: number
+//     results: Array<{
+//       adult: boolean
+//       backdrop_path: string
+//       first_air_date?: string
+//       release_date?: string
+//       video?: boolean
+//       genre_ids: number[]
+//       id: number
+//       media_type: string
+//       name?: string
+//       title?: string
+//       origin_country: string[]
+//       original_language: string
+//       original_name: string
+//       original_title?: string
+//       overview: string
+//       popularity: number
+//       poster_path: string
+//       vote_average: number
+//       vote_count: number
+//     }>
+//   }
+// }
 
 const App = () => {
-  const [trending, setTrending] = useState<Trending>({ trending: { page: 0, results: [] } })
-  const [netflixOriginals, setNetflixOriginals] = useState<netflixOriginals>({
+  // combined multiple setCategory into single setData state
+  const [data, setData] = useState<MovieData>({
+    trending: { page: 0, results: [] },
     netflixOriginals: { page: 0, results: [] },
-  })
-  const [horror, setHorror] = useState<Horror>({
     horror: { page: 0, results: [] },
   })
 
@@ -100,10 +100,20 @@ const App = () => {
     axios
       .get("http://localhost:8000/test")
       .then((response) => {
-        console.log(response.data)
-        setTrending(response.data)
-        setNetflixOriginals(response.data)
-        setHorror(response.data)
+        setData({
+          trending: {
+            page: response.data.trending.page,
+            results: response.data.trending.results,
+          },
+          netflixOriginals: {
+            page: response.data.netflixOriginals.page,
+            results: response.data.netflixOriginals.results,
+          },
+          horror: {
+            page: response.data.horror.page,
+            results: response.data.horror.results,
+          },
+        })
       })
       .catch((error) => {
         setError(error.message)
@@ -113,12 +123,11 @@ const App = () => {
   return (
     <>
       <Header />
-      {/* <RowTitle /> */}
       <h2 className="row-title" style={{ position: "absolute" }}>
         Trending Now
       </h2>
       <div className="media-scroller grid grid-flow-col pt-7" style={{ overflowX: "scroll", position: "relative" }}>
-        {trending.trending.results.map((item) => (
+        {data.trending.results.map((item) => (
           <Row
             key={item.id}
             id={item.id}
@@ -129,12 +138,11 @@ const App = () => {
           />
         ))}
       </div>
-      {/* <RowTitle /> */}
+      <h2 className="row-title" style={{ position: "absolute" }}>
+        Netflix Originals
+      </h2>
       <div className="media-scroller grid grid-flow-col pt-7" style={{ overflowX: "scroll", position: "relative" }}>
-        <h2 className="row-title" style={{ position: "absolute" }}>
-          Netflix Originals
-        </h2>
-        {netflixOriginals.netflixOriginals.results.map((item) => (
+        {data.netflixOriginals.results.map((item) => (
           <Row
             key={item.id}
             id={item.id}
@@ -145,12 +153,11 @@ const App = () => {
           />
         ))}
       </div>
-      {/* <RowTitle /> */}
+      <h2 className="row-title" style={{ position: "absolute" }}>
+        Horror
+      </h2>
       <div className="media-scroller grid grid-flow-col pt-7" style={{ overflowX: "scroll", position: "relative" }}>
-        <h2 className="row-title" style={{ position: "absolute" }}>
-          Horror
-        </h2>
-        {horror.horror.results.map((item) => (
+        {data.horror.results.map((item) => (
           <Row
             key={item.id}
             id={item.id}
