@@ -6,6 +6,7 @@ import Header from "./components/Header"
 import Row from "./components/Row"
 import "./App.css"
 import { MovieData } from "./results"
+import CategoryContainer from "./components/CategoryContainer"
 
 // interface Trending {
 //   trending: {
@@ -123,11 +124,10 @@ const App = () => {
   return (
     <>
       <Header />
-      <h2 className="row-title" style={{ position: "absolute" }}>
-        Trending Now
-      </h2>
-      <div className="media-scroller grid grid-flow-col pt-7" style={{ overflowX: "scroll", position: "relative" }}>
-        {data.trending.results.map((item) => (
+      <CategoryContainer
+        title="Trending Now"
+        data={data.trending}
+        render={(item) => (
           <Row
             key={item.id}
             id={item.id}
@@ -136,13 +136,12 @@ const App = () => {
             backdrop_path={item.backdrop_path}
             poster_path={item.poster_path}
           />
-        ))}
-      </div>
-      <h2 className="row-title" style={{ position: "absolute" }}>
-        Netflix Originals
-      </h2>
-      <div className="media-scroller grid grid-flow-col pt-7" style={{ overflowX: "scroll", position: "relative" }}>
-        {data.netflixOriginals.results.map((item) => (
+        )}
+      />
+      <CategoryContainer
+        title="Netflix Originals"
+        data={data.netflixOriginals}
+        render={(item) => (
           <Row
             key={item.id}
             id={item.id}
@@ -151,13 +150,12 @@ const App = () => {
             backdrop_path={item.backdrop_path}
             poster_path={item.poster_path}
           />
-        ))}
-      </div>
-      <h2 className="row-title" style={{ position: "absolute" }}>
-        Horror
-      </h2>
-      <div className="media-scroller grid grid-flow-col pt-7" style={{ overflowX: "scroll", position: "relative" }}>
-        {data.horror.results.map((item) => (
+        )}
+      />
+      <CategoryContainer
+        title="Horror"
+        data={data.horror}
+        render={(item) => (
           <Row
             key={item.id}
             id={item.id}
@@ -166,8 +164,8 @@ const App = () => {
             backdrop_path={item.backdrop_path}
             poster_path={item.poster_path}
           />
-        ))}
-      </div>
+        )}
+      />
     </>
   )
 }
