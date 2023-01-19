@@ -1,105 +1,52 @@
 import React from "react"
 import { useEffect, useState } from "react"
 import axios from "axios"
-import { Route, Routes, Link } from "react-router-dom"
+import { Route, Routes, Link, useNavigate, RouteProps } from "react-router-dom"
 import Header from "./components/Header"
 import Row from "./components/Row"
 import "./App.css"
 import { MovieData } from "./results"
 import CategoryContainer from "./components/CategoryContainer"
-
-// interface Trending {
-//   trending: {
-//     page: number
-//     results: Array<{
-//       adult: boolean
-//       backdrop_path: string
-//       first_air_date?: string
-//       release_date?: string
-//       video?: boolean
-//       genre_ids: number[]
-//       id: number
-//       media_type: string
-//       name?: string
-//       title?: string
-//       origin_country: string[]
-//       original_language: string
-//       original_name: string
-//       original_title?: string
-//       overview: string
-//       popularity: number
-//       poster_path: string
-//       vote_average: number
-//       vote_count: number
-//     }>
-//   }
-// }
-// interface netflixOriginals {
-//   netflixOriginals: {
-//     page: number
-//     results: Array<{
-//       adult: boolean
-//       backdrop_path: string
-//       first_air_date?: string
-//       release_date?: string
-//       video?: boolean
-//       genre_ids: number[]
-//       id: number
-//       media_type: string
-//       name?: string
-//       title?: string
-//       origin_country: string[]
-//       original_language: string
-//       original_name: string
-//       original_title?: string
-//       overview: string
-//       popularity: number
-//       poster_path: string
-//       vote_average: number
-//       vote_count: number
-//     }>
-//   }
-// }
-// interface Horror {
-//   horror: {
-//     page: number
-//     results: Array<{
-//       adult: boolean
-//       backdrop_path: string
-//       first_air_date?: string
-//       release_date?: string
-//       video?: boolean
-//       genre_ids: number[]
-//       id: number
-//       media_type: string
-//       name?: string
-//       title?: string
-//       origin_country: string[]
-//       original_language: string
-//       original_name: string
-//       original_title?: string
-//       overview: string
-//       popularity: number
-//       poster_path: string
-//       vote_average: number
-//       vote_count: number
-//     }>
-//   }
-// }
+import Login from "./components/Login"
+import Register from "./components/Reigster"
 
 const App = () => {
-  // combined multiple setCategory into single setData state
   const [data, setData] = useState<MovieData>({
     trending: { page: 0, results: [] },
     netflixOriginals: { page: 0, results: [] },
     horror: { page: 0, results: [] },
   })
-
   const [error, setError] = useState<string | null>(null)
+
+  // interface Props {
+  //   handleLogin: (user: { username: string; password: string }) => void
+  //   handleRegister: (user: { username: string; password: string }) => void
+  // }
+  // interface State {
+  //   user: {
+  //     username: string
+  //     password: string
+  //   }
+  //   error: string | null
+  // }
+  const navigate = useNavigate()
+  const [user, setUser] = useState({ id: null, username: "", password: "" })
+
+  const handleRegister = async () => {
+    const { data } = await axios.post("http://localhost:8000/register", user)
+    localStorage.setItem("token", data.token)
+    navigate("/login")
+  }
+
+  const handleLogin = async () => {
+    const { data } = await axios.post("http://localhost:8000/login", user)
+    localStorage.setItem("token", data.token)
+    navigate("/test")
+  }
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/test")
+      .get("http://localhost:8000/main")
       .then((response) => {
         setData({
           trending: {
@@ -166,6 +113,10 @@ const App = () => {
           />
         )}
       />
+      <Routes>
+        <Route path="/login" element={<Login handleLogin={handleLogin} />} />
+        <Route path="/register" element={<Register handleRegister={handleRegister} />} />
+      </Routes>
     </>
   )
 }
