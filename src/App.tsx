@@ -1,118 +1,74 @@
 import React from "react"
+import "./App.css"
 import { useEffect, useState } from "react"
 import axios from "axios"
-import { Route, Routes, Link } from "react-router-dom"
+import { Route, Routes, Link, useNavigate, RouteProps } from "react-router-dom"
+import { MediaCategory } from "./results"
+import Login from "./components/Login"
+import Register from "./components/Reigster"
+import Main from "./components/Main"
 import Header from "./components/Header"
-import Row from "./components/Row"
-import "./App.css"
-import { MovieData } from "./results"
-import CategoryContainer from "./components/CategoryContainer"
-
-// interface Trending {
-//   trending: {
-//     page: number
-//     results: Array<{
-//       adult: boolean
-//       backdrop_path: string
-//       first_air_date?: string
-//       release_date?: string
-//       video?: boolean
-//       genre_ids: number[]
-//       id: number
-//       media_type: string
-//       name?: string
-//       title?: string
-//       origin_country: string[]
-//       original_language: string
-//       original_name: string
-//       original_title?: string
-//       overview: string
-//       popularity: number
-//       poster_path: string
-//       vote_average: number
-//       vote_count: number
-//     }>
-//   }
-// }
-// interface netflixOriginals {
-//   netflixOriginals: {
-//     page: number
-//     results: Array<{
-//       adult: boolean
-//       backdrop_path: string
-//       first_air_date?: string
-//       release_date?: string
-//       video?: boolean
-//       genre_ids: number[]
-//       id: number
-//       media_type: string
-//       name?: string
-//       title?: string
-//       origin_country: string[]
-//       original_language: string
-//       original_name: string
-//       original_title?: string
-//       overview: string
-//       popularity: number
-//       poster_path: string
-//       vote_average: number
-//       vote_count: number
-//     }>
-//   }
-// }
-// interface Horror {
-//   horror: {
-//     page: number
-//     results: Array<{
-//       adult: boolean
-//       backdrop_path: string
-//       first_air_date?: string
-//       release_date?: string
-//       video?: boolean
-//       genre_ids: number[]
-//       id: number
-//       media_type: string
-//       name?: string
-//       title?: string
-//       origin_country: string[]
-//       original_language: string
-//       original_name: string
-//       original_title?: string
-//       overview: string
-//       popularity: number
-//       poster_path: string
-//       vote_average: number
-//       vote_count: number
-//     }>
-//   }
-// }
 
 const App = () => {
-  // combined multiple setCategory into single setData state
-  const [data, setData] = useState<MovieData>({
-    trending: { page: 0, results: [] },
-    netflixOriginals: { page: 0, results: [] },
-    horror: { page: 0, results: [] },
+  const [data, setData] = useState<MediaCategory>({
+    trending: { page: 0, data: [] },
+    netflixOriginals: { page: 0, data: [] },
+    topRated: { page: 0, data: [] },
+    horror: { page: 0, data: [] },
+    comedy: { page: 0, data: [] },
+    action: { page: 0, data: [] },
+    documentaries: { page: 0, data: [] },
   })
-
   const [error, setError] = useState<string | null>(null)
+
+  const navigate = useNavigate()
+  const [user, setUser] = useState({ id: null, username: "", password: "" })
+
+  const handleRegister = async () => {
+    const { data } = await axios.post("http://localhost:8000/register", user)
+    localStorage.setItem("token", data.token)
+    navigate("/login")
+  }
+
+  const handleLogin = async () => {
+    const { data } = await axios.post("http://localhost:8000/login", user)
+    localStorage.setItem("token", data.token)
+    navigate("/main")
+  }
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/test")
+      .get("http://localhost:8000/")
       .then((response) => {
+        console.log(response)
         setData({
           trending: {
             page: response.data.trending.page,
-            results: response.data.trending.results,
+            data: response.data.trending.results,
           },
           netflixOriginals: {
             page: response.data.netflixOriginals.page,
-            results: response.data.netflixOriginals.results,
+            data: response.data.netflixOriginals.results,
+          },
+          topRated: {
+            page: response.data.topRated.page,
+            data: response.data.topRated.results,
           },
           horror: {
             page: response.data.horror.page,
-            results: response.data.horror.results,
+            data: response.data.horror.results,
+          },
+          comedy: {
+            page: response.data.comedy.page,
+            data: response.data.comedy.results,
+          },
+          action: {
+            page: response.data.action.page,
+            data: response.data.action.results,
+          },
+          documentaries: {
+            page: response.data.documentaries.page,
+            data: response.data.documentaries.results,
           },
         })
       })
@@ -124,48 +80,11 @@ const App = () => {
   return (
     <>
       <Header />
-      <CategoryContainer
-        title="Trending Now"
-        data={data.trending}
-        render={(item) => (
-          <Row
-            key={item.id}
-            id={item.id}
-            name={item.name}
-            title="Trending Now"
-            backdrop_path={item.backdrop_path}
-            poster_path={item.poster_path}
-          />
-        )}
-      />
-      <CategoryContainer
-        title="Netflix Originals"
-        data={data.netflixOriginals}
-        render={(item) => (
-          <Row
-            key={item.id}
-            id={item.id}
-            name={item.name}
-            title="Netflix Originals"
-            backdrop_path={item.backdrop_path}
-            poster_path={item.poster_path}
-          />
-        )}
-      />
-      <CategoryContainer
-        title="Horror"
-        data={data.horror}
-        render={(item) => (
-          <Row
-            key={item.id}
-            id={item.id}
-            name={item.name}
-            title="Horror"
-            backdrop_path={item.backdrop_path}
-            poster_path={item.poster_path}
-          />
-        )}
-      />
+      <Routes>
+        <Route path="/" element={<Main Data={data} />} />
+        <Route path="/login" element={<Login handleLogin={handleLogin} />} />
+        <Route path="/register" element={<Register handleRegister={handleRegister} />} />
+      </Routes>
     </>
   )
 }

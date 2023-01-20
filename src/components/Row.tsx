@@ -1,20 +1,27 @@
 import React from "react"
-import Data from "../App"
+import { MediaData } from "../results"
 
-interface Props {
-  id: number
-  name?: string
-  title?: string
-  backdrop_path?: string
-  poster_path?: string
+interface CategoryProps {
+  title: string
+  data: { page: number; data: MediaData[] }
+  render: (item: MediaData) => JSX.Element
 }
 
-const Row: React.FC<Props> = ({ id, name, title, backdrop_path, poster_path }) => {
-  const image = `https://image.tmdb.org/t/p/w500${backdrop_path || poster_path}`
+const Row = ({ title, data, render }: CategoryProps) => {
   return (
-    <div className="media-element" style={{ width: "250px", flexShrink: 0, flexBasis: 0 }}>
-      <img src={image} alt={name || title} />
-    </div>
+    <>
+      <div className="h-50 pt-5 pl-4">
+        <h2 className="row-title" style={{ position: "absolute" }}>
+          {title}
+        </h2>
+        <div
+          className="media-scroller scrollbar-hide grid grid-flow-col pt-7"
+          style={{ overflowX: "scroll", position: "relative" }}
+        >
+          {data.data.map(render)}
+        </div>
+      </div>
+    </>
   )
 }
 
