@@ -13,7 +13,11 @@ const App = () => {
   const [data, setData] = useState<MediaCategory>({
     trending: { page: 0, data: [] },
     netflixOriginals: { page: 0, data: [] },
+    topRated: { page: 0, data: [] },
     horror: { page: 0, data: [] },
+    comedy: { page: 0, data: [] },
+    action: { page: 0, data: [] },
+    documentaries: { page: 0, data: [] },
   })
   const [error, setError] = useState<string | null>(null)
 
@@ -46,9 +50,25 @@ const App = () => {
             page: response.data.netflixOriginals.page,
             data: response.data.netflixOriginals.results,
           },
+          topRated: {
+            page: response.data.topRated.page,
+            data: response.data.topRated.results,
+          },
           horror: {
             page: response.data.horror.page,
             data: response.data.horror.results,
+          },
+          comedy: {
+            page: response.data.comedy.page,
+            data: response.data.comedy.results,
+          },
+          action: {
+            page: response.data.action.page,
+            data: response.data.action.results,
+          },
+          documentaries: {
+            page: response.data.documentaries.page,
+            data: response.data.documentaries.results,
           },
         })
       })

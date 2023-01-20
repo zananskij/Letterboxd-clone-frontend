@@ -221,7 +221,23 @@ export interface MediaCategory {
     page: number
     data: MediaData[]
   }
+  topRated: {
+    page: number
+    data: MediaData[]
+  }
   horror: {
+    page: number
+    data: MediaData[]
+  }
+  comedy: {
+    page: number
+    data: MediaData[]
+  }
+  action: {
+    page: number
+    data: MediaData[]
+  }
+  documentaries: {
     page: number
     data: MediaData[]
   }

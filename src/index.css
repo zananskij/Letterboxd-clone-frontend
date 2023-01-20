@@ -117,3 +117,15 @@ box-icon {
 .form-inline {
   width: 50%;
 }
+
+.overview-text {
+  text-shadow: 3px 3px 2px rgb(30 29 39 /20%);
+}
+
+/* .text-shadow-md {
+  text-shadow: 0px 1px 2px rgb(30 29 39 / 19%), 1px 2px 4px rgb(54 64 147/ 18%);
+} */
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

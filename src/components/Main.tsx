@@ -1,7 +1,7 @@
 import React from "react"
 
-import CategoryContainer from "./CategoryContainer"
 import Row from "./Row"
+import Card from "./Card"
 import Banner from "./Banner"
 import { MediaCategory } from "../results"
 
@@ -9,13 +9,13 @@ const Main = ({ Data }: { Data: MediaCategory }) => {
   return (
     <>
       <Banner Data={Data} />
-      <CategoryContainer title="Trending Now" data={Data.trending} render={(item) => <Row item={item} />} />
-      <CategoryContainer
-        title="Netflix Originals"
-        data={Data.netflixOriginals}
-        render={(item) => <Row item={item} />}
-      />
-      <CategoryContainer title="Horror" data={Data.horror} render={(item) => <Row item={item} />} />
+      <Row title="Trending Now" data={Data.trending} render={(item) => <Card item={item} />} />
+      <Row title="Netflix Originals" data={Data.netflixOriginals} render={(item) => <Card item={item} />} />
+      <Row title="Top Rated" data={Data.topRated} render={(item) => <Card item={item} />} />
+      <Row title="Horror" data={Data.horror} render={(item) => <Card item={item} />} />
+      <Row title="Comedy" data={Data.comedy} render={(item) => <Card item={item} />} />
+      <Row title="Action" data={Data.action} render={(item) => <Card item={item} />} />
+      <Row title="Documenaties" data={Data.documentaries} render={(item) => <Card item={item} />} />
     </>
   )
 }

@@ -1,21 +1,28 @@
 import React from "react"
 import { MediaData } from "../results"
 
-interface Props {
-  item: MediaData
+interface CategoryProps {
+  title: string
+  data: { page: number; data: MediaData[] }
+  render: (item: MediaData) => JSX.Element
 }
 
-const Row: React.FC<Props> = ({ item }) => {
-  const image = `https://image.tmdb.org/t/p/w500${item.backdrop_path || item.poster_path}`
+const Row = ({ title, data, render }: CategoryProps) => {
   return (
-    <div className="media-element" style={{ width: "250px", flexShrink: 0, flexBasis: 0 }}>
-      <img src={image} alt={item.name || item.title} />
-    </div>
+    <>
+      <div className="h-50 pt-5 pl-4">
+        <h2 className="row-title" style={{ position: "absolute" }}>
+          {title}
+        </h2>
+        <div
+          className="media-scroller scrollbar-hide grid grid-flow-col pt-7"
+          style={{ overflowX: "scroll", position: "relative" }}
+        >
+          {data.data.map(render)}
+        </div>
+      </div>
+    </>
   )
 }
 
 export default Row
-
-// interface Props {
-//   item: MediaData
-// }
