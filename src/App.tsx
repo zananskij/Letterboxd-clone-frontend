@@ -1,34 +1,22 @@
 import React from "react"
+import "./App.css"
 import { useEffect, useState } from "react"
 import axios from "axios"
 import { Route, Routes, Link, useNavigate, RouteProps } from "react-router-dom"
-import Header from "./components/Header"
-import Row from "./components/Row"
-import "./App.css"
-import { MovieData } from "./results"
-import CategoryContainer from "./components/CategoryContainer"
+import { MediaCategory } from "./results"
 import Login from "./components/Login"
 import Register from "./components/Reigster"
+import Main from "./components/Main"
+import Header from "./components/Header"
 
 const App = () => {
-  const [data, setData] = useState<MovieData>({
-    trending: { page: 0, results: [] },
-    netflixOriginals: { page: 0, results: [] },
-    horror: { page: 0, results: [] },
+  const [data, setData] = useState<MediaCategory>({
+    trending: { page: 0, data: [] },
+    netflixOriginals: { page: 0, data: [] },
+    horror: { page: 0, data: [] },
   })
   const [error, setError] = useState<string | null>(null)
 
-  // interface Props {
-  //   handleLogin: (user: { username: string; password: string }) => void
-  //   handleRegister: (user: { username: string; password: string }) => void
-  // }
-  // interface State {
-  //   user: {
-  //     username: string
-  //     password: string
-  //   }
-  //   error: string | null
-  // }
   const navigate = useNavigate()
   const [user, setUser] = useState({ id: null, username: "", password: "" })
 
@@ -41,25 +29,26 @@ const App = () => {
   const handleLogin = async () => {
     const { data } = await axios.post("http://localhost:8000/login", user)
     localStorage.setItem("token", data.token)
-    navigate("/test")
+    navigate("/main")
   }
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/main")
+      .get("http://localhost:8000/")
       .then((response) => {
+        console.log(response)
         setData({
           trending: {
             page: response.data.trending.page,
-            results: response.data.trending.results,
+            data: response.data.trending.results,
           },
           netflixOriginals: {
             page: response.data.netflixOriginals.page,
-            results: response.data.netflixOriginals.results,
+            data: response.data.netflixOriginals.results,
           },
           horror: {
             page: response.data.horror.page,
-            results: response.data.horror.results,
+            data: response.data.horror.results,
           },
         })
       })
@@ -71,49 +60,8 @@ const App = () => {
   return (
     <>
       <Header />
-      <CategoryContainer
-        title="Trending Now"
-        data={data.trending}
-        render={(item) => (
-          <Row
-            key={item.id}
-            id={item.id}
-            name={item.name}
-            title="Trending Now"
-            backdrop_path={item.backdrop_path}
-            poster_path={item.poster_path}
-          />
-        )}
-      />
-      <CategoryContainer
-        title="Netflix Originals"
-        data={data.netflixOriginals}
-        render={(item) => (
-          <Row
-            key={item.id}
-            id={item.id}
-            name={item.name}
-            title="Netflix Originals"
-            backdrop_path={item.backdrop_path}
-            poster_path={item.poster_path}
-          />
-        )}
-      />
-      <CategoryContainer
-        title="Horror"
-        data={data.horror}
-        render={(item) => (
-          <Row
-            key={item.id}
-            id={item.id}
-            name={item.name}
-            title="Horror"
-            backdrop_path={item.backdrop_path}
-            poster_path={item.poster_path}
-          />
-        )}
-      />
       <Routes>
+        <Route path="/" element={<Main Data={data} />} />
         <Route path="/login" element={<Login handleLogin={handleLogin} />} />
         <Route path="/register" element={<Register handleRegister={handleRegister} />} />
       </Routes>
