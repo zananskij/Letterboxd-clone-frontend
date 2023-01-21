@@ -18,7 +18,7 @@ const Register: React.FC<Props> = (props) => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     try {
-      const { data } = await axios.post("http://localhost:8000/register", user)
+      const { data } = await axios.post("https://letterboxd-clone-backend.herokuapp.com/register", user)
       localStorage.setItem("token", data.token)
       console.log(`username: ${user.username} , password: ${user.password}`)
       navigate("/test")
