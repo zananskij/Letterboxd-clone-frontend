@@ -31,7 +31,10 @@ const App = () => {
   // }
   const handleRegister = async () => {
     try {
-      const res = await axios.post("https://letterboxd-clone-backend.herokuapp.com/register", user)
+      const res = await axios.post("https://letterboxd-clone-backend.herokuapp.com/register", {
+        username: user.username,
+        password: user.password,
+      })
       console.log(res.data)
       navigate("/")
     } catch (err) {

@@ -21,7 +21,10 @@ const Register: React.FC<Props> = (props) => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     try {
-      await axios.post("https://letterboxd-clone-backend.herokuapp.com/register", user)
+      await axios.post("https://letterboxd-clone-backend.herokuapp.com/register", {
+        username: user.username,
+        password: user.password,
+      })
       console.log(`username: ${user.username} , password: ${user.password}`)
       navigate("/")
     } catch (error: any) {
