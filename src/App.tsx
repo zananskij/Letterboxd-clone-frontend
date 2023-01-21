@@ -24,10 +24,19 @@ const App = () => {
   const navigate = useNavigate()
   const [user, setUser] = useState({ id: null, username: "", password: "" })
 
+  // const handleRegister = async () => {
+  //   await axios.post("https://letterboxd-clone-backend.herokuapp.com/register", user)
+  //   // localStorage.setItem("token", data.token)
+  //   navigate("/")
+  // }
   const handleRegister = async () => {
-    await axios.post("https://letterboxd-clone-backend.herokuapp.com/register", user)
-    // localStorage.setItem("token", data.token)
-    navigate("/")
+    try {
+      const res = await axios.post("https://letterboxd-clone-backend.herokuapp.com/register", user)
+      console.log(res.data)
+      navigate("/")
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   const handleLogin = async () => {
