@@ -25,9 +25,9 @@ const App = () => {
   const [user, setUser] = useState({ id: null, username: "", password: "" })
 
   const handleRegister = async () => {
-    const { data } = await axios.post("https://letterboxd-clone-backend.herokuapp.com/register", user)
-    localStorage.setItem("token", data.token)
-    navigate("/login")
+    await axios.post("https://letterboxd-clone-backend.herokuapp.com/register", user)
+    // localStorage.setItem("token", data.token)
+    navigate("/")
   }
 
   const handleLogin = async () => {

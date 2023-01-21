@@ -7,7 +7,7 @@ interface Props {
 }
 
 const Register: React.FC<Props> = (props) => {
-  const [user, setUser] = useState({ id: null, username: "", password: "" })
+  const [user, setUser] = useState({ username: "", password: "" })
 
   const navigate = useNavigate()
 
@@ -18,10 +18,9 @@ const Register: React.FC<Props> = (props) => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     try {
-      const { data } = await axios.post("https://letterboxd-clone-backend.herokuapp.com/register", user)
-      localStorage.setItem("token", data.token)
+      await axios.post("https://letterboxd-clone-backend.herokuapp.com/register", user)
       console.log(`username: ${user.username} , password: ${user.password}`)
-      navigate("/test")
+      navigate("/")
     } catch (error) {
       // handle error
     }
