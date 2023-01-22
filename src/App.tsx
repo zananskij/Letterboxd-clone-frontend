@@ -24,28 +24,62 @@ const App = () => {
   const navigate = useNavigate()
   const [user, setUser] = useState({ id: null, username: "", password: "" })
 
+  interface RegisterData {
+    username: any
+    password: any
+  }
+
+  const [registerData, setRegisterData] = useState<RegisterData>({
+    username: "",
+    password: "",
+  })
+
+  const handleRegister = async (data: RegisterData) => {
+    try {
+      await axios.post("https://letterboxd-clone-backend.herokuapp.com/register", data)
+      console.log("Successfully registered")
+      console.log(data)
+      navigate("/")
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
   // const handleRegister = async () => {
   //   await axios.post("https://letterboxd-clone-backend.herokuapp.com/register", user)
   //   // localStorage.setItem("token", data.token)
   //   navigate("/")
   // }
-  const handleRegister = async () => {
-    try {
-      const res = await axios.post("https://letterboxd-clone-backend.herokuapp.com/register", {
-        username: user.username,
-        password: user.password,
-      })
-      console.log(res.data)
-      navigate("/")
-    } catch (err) {
-      console.log(err)
-    }
-  }
+  // const handleRegister = async () => {
+  //   try {
+  //     const res = await axios.post("/register", {
+  //       username: user.username,
+  //       password: user.password,
+  //     })
+  //     console.log(res.data)
+  //     navigate("/")
+  //   } catch (err) {
+  //     console.log(err)
+  //   }
+  // }
+  // const handleRegister = async (username: string, password: string) => {
+  //   try {
+  //     const res = await axios.post("http://localhost:5432/register", {
+  //       username,
+  //       password,
+  //     })
+  //     console.log(res.data)
+  //   } catch (err) {
+  //     console.error(err)
+  //   }
+  // }
+
+  // handleRegister("test_username", "test_password")
 
   const handleLogin = async () => {
-    const { data } = await axios.post("https://letterboxd-clone-backend.herokuapp.com/login", user)
-    localStorage.setItem("token", data.token)
-    navigate("/main")
+    await axios.post("https://letterboxd-clone-backend.herokuapp.com//login", user)
+
+    navigate("/")
   }
 
   useEffect(() => {
@@ -95,7 +129,13 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Main Data={data} />} />
         <Route path="/login" element={<Login handleLogin={handleLogin} />} />
-        <Route path="/register" element={<Register handleRegister={handleRegister} />} />
+        {/* <Route path="/register" element={<Register handleRegister={handleRegister} />} /> */}
+        <Route
+          path="/register"
+          element={
+            <Register registerData={registerData} setRegisterData={setRegisterData} handleRegister={handleRegister} />
+          }
+        />
       </Routes>
     </>
   )
