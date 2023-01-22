@@ -25,9 +25,10 @@ const Login: React.FC<Props> = (props) => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     try {
-      const { data } = await axios.post("/login", user)
-      localStorage.setItem("token", data.token)
-      navigate("/test")
+      // const { data } =
+      await axios.post("/login", user)
+      // localStorage.setItem("token", data.token)
+      navigate("/")
     } catch (error) {}
   }
 
