@@ -1,13 +1,14 @@
 import React from "react"
 import { useState, useEffect } from "react"
 import { MediaData } from "../results"
+import axios from "axios"
 
 interface Props {
   item: MediaData
   userId: string
 }
 
-const Card: React.FC<Props> = ({ item }) => {
+const Card: React.FC<Props> = ({ item, userId }) => {
   const image = `https://image.tmdb.org/t/p/w500${item.backdrop_path || item.poster_path}`
 
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -15,26 +16,17 @@ const Card: React.FC<Props> = ({ item }) => {
     setIsModalOpen(!isModalOpen)
   }
 
-  const handleWatchLater = async () => {
+  const [watchLater, setWatchLater] = useState("")
+  const handleWatchLater = async (event: React.FormEvent<HTMLButtonElement>) => {
+    event.preventDefault()
     try {
-      const data = { media_id: item.id, user_id: userId }
-      const response = await fetch("/watchlater", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      })
-      const result = await response.json()
-      console.log(result)
-      console.log("Media added to watch later list")
+      const data = { media_id: item.id, userId }
+      const response = await axios.post("http://localhost:8000/watchlater", data)
+      setWatchLater(response.data)
     } catch (error) {
-      console.error(error)
+      console.log(error)
     }
   }
-  const [userId, setUserId] = useState("")
-
-  useEffect(() => {
-    setUserId(userId)
-  }, [userId])
 
   return (
     <>
@@ -73,3 +65,19 @@ const Card: React.FC<Props> = ({ item }) => {
 }
 
 export default Card
+
+// const handleWatchLater = async () => {
+//   try {
+//     const data = { media_id: item.id, user_id: userId }
+//     const response = await fetch("/watchlater", {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json" },
+//       body: JSON.stringify(data),
+//     })
+//     const result = await response.json()
+//     console.log(result)
+//     console.log("Media added to watch later list")
+//   } catch (error) {
+//     console.error(error)
+//   }
+// }
