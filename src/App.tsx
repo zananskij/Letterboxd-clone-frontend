@@ -141,10 +141,7 @@ const App = () => {
         <Route path="/" element={<Main Data={data} />} />
         <Route path="/login" element={<Login handleLogin={handleLogin} />} />
         {/* <Route path="/register" element={<Register handleRegister={handleRegister} />} /> */}
-        <Route
-          path="/register"
-          element={<Route path="/register" element={<Register handleRegister={handleRegister} />} />}
-        />
+        <Route path="/register" element={<Register handleRegister={handleRegister} />} />
       </Routes>
     </>
   )
