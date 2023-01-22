@@ -3,17 +3,6 @@ import { UserContext } from "../context"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
 
-// interface Props {
-//   handleLogin: (user: { username: string; password: string }) => void
-// }
-// interface State {
-//   user: {
-//     username: string
-//     password: string
-//   }
-//   error: string | null
-// }
-
 interface User {
   id: number | null
   username: string
@@ -85,3 +74,14 @@ const Login: React.FC = () => {
 }
 
 export default Login
+
+// interface Props {
+//   handleLogin: (user: { username: string; password: string }) => void
+// }
+// interface State {
+//   user: {
+//     username: string
+//     password: string
+//   }
+//   error: string | null
+// }
