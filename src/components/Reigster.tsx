@@ -1,4 +1,6 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
+import { UserContext } from "../context"
+
 // import axios, { AxiosError } from "axios"
 // import { error } from "axios"
 // import { useNavigate } from "react-router-dom"
@@ -224,12 +226,18 @@ import React, { useState } from "react"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
 
-interface Props {
-  handleRegister: (user: { username: string; password: string }) => void
+// interface Props {
+//   handleRegister: (user: { username: string; password: string }) => void
+// }
+interface User {
+  id: number | null
+  username: string
+  password: string
 }
 
-const Register: React.FC<Props> = (props) => {
-  const [user, setUser] = useState({ id: null, username: "", password: "" })
+const Register: React.FC = () => {
+  // const [user, setUser] = useState({ id: null, username: "", password: "" })
+  const { user, setUser } = useContext(UserContext)
 
   const navigate = useNavigate()
 

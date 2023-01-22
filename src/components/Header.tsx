@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useContext } from "react"
 import { Link, Route, Routes } from "react-router-dom"
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline"
 import { UserIcon } from "@heroicons/react/24/outline"
+import userEvent from "@testing-library/user-event"
+import { UserContext } from "../context"
 
 const Header = () => {
-  // updating scroll state
   const [scroll, setScroll] = useState(false)
-  // logged in state to route user depending on state
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const { user = { id: null, username: "", password: "" }, setUser } = useContext(UserContext)
+
+  // const [user, setUser] = useState({ id: null, username: "", password: "" })
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,7 +24,6 @@ const Header = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll)
     }
-    // add empty array to prevent from always being run when rendered
   }, [])
 
   return (
@@ -29,10 +31,10 @@ const Header = () => {
       <div className="flex justify-between space-x-2 md:space-x-10">
         <ul className="space-x-4 md:flex">
           <li className="headerLink">Home</li>
-          <li className="headerLink">Movies</li>
-          <li className="headerLink">Shows</li>
-          <li className="headerLink">Trending</li>
           <li className="headerLink">My List</li>
+          <li className="headerLink">Watchlater</li>
+          <li className="headerLink">Trending</li>
+          <li className="headerLink">{user.username && `Welcome back, ${user.username}`}</li>
         </ul>
         <div className="flex justify-end space-x-4 text-sm">
           <MagnifyingGlassIcon className="hidden h-5 w-5 sm:inline text-white" />

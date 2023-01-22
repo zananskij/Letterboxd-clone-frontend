@@ -8,7 +8,19 @@ import Login from "./components/Login"
 import Register from "./components/Reigster"
 import Main from "./components/Main"
 import Header from "./components/Header"
+import UserProvider from "./context"
+import { Dispatch, SetStateAction } from "react"
 
+interface User {
+  id: number | null
+  username: string
+  password: string
+}
+
+interface UserProviderProps {
+  value: { user: User; setUser: Dispatch<SetStateAction<User>> }
+  children: React.ReactNode
+}
 const App = () => {
   const [data, setData] = useState<MediaCategory>({
     trending: { page: 0, data: [] },
@@ -22,28 +34,9 @@ const App = () => {
   const [error, setError] = useState<string | null>(null)
 
   const navigate = useNavigate()
-  const [user, setUser] = useState({ id: null, username: "", password: "" })
+  // const [user, setUser] = useState({ id: null, username: "", password: "" })
+  const [user, setUser] = useState<User>({ id: null, username: "", password: "" })
 
-  // interface RegisterData {
-  //   username: any
-  //   password: any
-  // }
-
-  // const [registerData, setRegisterData] = useState<RegisterData>({
-  //   username: "",
-  //   password: "",
-  // })
-
-  // const handleRegister = async (data: RegisterData) => {
-  //   try {
-  //     await axios.post("https://letterboxd-clone-backend.herokuapp.com/register", data)
-  //     console.log("Successfully registered")
-  //     console.log(data)
-  //     navigate("/")
-  //   } catch (err) {
-  //     console.error(err)
-  //   }
-  // }
   const handleRegister = async () => {
     const { data } = await axios.post("http://localhost:8000/register", user)
     localStorage.setItem("token", data.token)
@@ -55,43 +48,6 @@ const App = () => {
     localStorage.setItem("token", data.token)
     navigate("/")
   }
-
-  // const handleRegister = async () => {
-  //   await axios.post("https://letterboxd-clone-backend.herokuapp.com/register", user)
-  //   // localStorage.setItem("token", data.token)
-  //   navigate("/")
-  // }
-  // const handleRegister = async () => {
-  //   try {
-  //     const res = await axios.post("/register", {
-  //       username: user.username,
-  //       password: user.password,
-  //     })
-  //     console.log(res.data)
-  //     navigate("/")
-  //   } catch (err) {
-  //     console.log(err)
-  //   }
-  // }
-  // const handleRegister = async (username: string, password: string) => {
-  //   try {
-  //     const res = await axios.post("http://localhost:5432/register", {
-  //       username,
-  //       password,
-  //     })
-  //     console.log(res.data)
-  //   } catch (err) {
-  //     console.error(err)
-  //   }
-  // }
-
-  // handleRegister("test_username", "test_password")
-
-  // const handleLogin = async () => {
-  //   await axios.post("https://letterboxd-clone-backend.herokuapp.com//login", user)
-
-  //   navigate("/")
-  // }
 
   useEffect(() => {
     axios
@@ -135,15 +91,73 @@ const App = () => {
   }, [])
 
   return (
-    <>
+    <UserProvider value={{ user, setUser }}>
       <Header />
       <Routes>
         <Route path="/" element={<Main Data={data} />} />
-        <Route path="/login" element={<Login handleLogin={handleLogin} />} />
-        <Route path="/register" element={<Register handleRegister={handleRegister} />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
-    </>
+    </UserProvider>
   )
 }
 
 export default App
+
+// interface RegisterData {
+//   username: any
+//   password: any
+// }
+
+// const [registerData, setRegisterData] = useState<RegisterData>({
+//   username: "",
+//   password: "",
+// })
+
+// const handleRegister = async (data: RegisterData) => {
+//   try {
+//     await axios.post("https://letterboxd-clone-backend.herokuapp.com/register", data)
+//     console.log("Successfully registered")
+//     console.log(data)
+//     navigate("/")
+//   } catch (err) {
+//     console.error(err)
+//   }
+// }
+
+// const handleRegister = async () => {
+//   await axios.post("https://letterboxd-clone-backend.herokuapp.com/register", user)
+//   // localStorage.setItem("token", data.token)
+//   navigate("/")
+// }
+// const handleRegister = async () => {
+//   try {
+//     const res = await axios.post("/register", {
+//       username: user.username,
+//       password: user.password,
+//     })
+//     console.log(res.data)
+//     navigate("/")
+//   } catch (err) {
+//     console.log(err)
+//   }
+// }
+// const handleRegister = async (username: string, password: string) => {
+//   try {
+//     const res = await axios.post("http://localhost:5432/register", {
+//       username,
+//       password,
+//     })
+//     console.log(res.data)
+//   } catch (err) {
+//     console.error(err)
+//   }
+// }
+
+// handleRegister("test_username", "test_password")
+
+// const handleLogin = async () => {
+//   await axios.post("https://letterboxd-clone-backend.herokuapp.com//login", user)
+
+//   navigate("/")
+// }

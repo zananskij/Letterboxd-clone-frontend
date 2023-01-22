@@ -1,22 +1,28 @@
-import React, { useState } from "react"
+import React, { useState, useContext } from "react"
+import { UserContext } from "../context"
 import axios from "axios"
 import { useNavigate } from "react-router-dom"
 
-interface Props {
-  handleLogin: (user: { username: string; password: string }) => void
-}
-interface State {
-  user: {
-    username: string
-    password: string
-  }
-  error: string | null
+// interface Props {
+//   handleLogin: (user: { username: string; password: string }) => void
+// }
+// interface State {
+//   user: {
+//     username: string
+//     password: string
+//   }
+//   error: string | null
+// }
+
+interface User {
+  id: number | null
+  username: string
+  password: string
 }
 
-const Login: React.FC<Props> = (props) => {
-  const [user, setUser] = useState<State["user"]>({ username: "", password: "" })
-  const [error, setError] = useState<State["error"]>(null)
-
+const Login: React.FC = () => {
+  const { user, setUser } = useContext(UserContext)
+  const [error, setError] = useState<string | null>(null)
   const navigate = useNavigate()
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,6 +33,7 @@ const Login: React.FC<Props> = (props) => {
     try {
       const { data } = await axios.post("http://localhost:8000/login", user)
       localStorage.setItem("token", data.token)
+      setUser(data.user)
       navigate("/")
     } catch (error) {}
   }
