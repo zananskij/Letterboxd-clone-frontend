@@ -4,6 +4,7 @@ import { MediaData } from "../results"
 
 interface Props {
   item: MediaData
+  userId: string
 }
 
 const Card: React.FC<Props> = ({ item }) => {
@@ -13,6 +14,28 @@ const Card: React.FC<Props> = ({ item }) => {
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen)
   }
+
+  const handleWatchLater = async () => {
+    try {
+      const data = { media_id: item.id, user_id: userId }
+      const response = await fetch("/watchlater", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      })
+      const result = await response.json()
+      console.log(result)
+      console.log("Media added to watch later list")
+    } catch (error) {
+      console.error(error)
+    }
+  }
+  const [userId, setUserId] = useState("")
+
+  useEffect(() => {
+    setUserId(userId)
+  }, [userId])
+
   return (
     <>
       <div
@@ -33,7 +56,10 @@ const Card: React.FC<Props> = ({ item }) => {
             </div>
             <p className="py-8 px-2 text-2xl">{item.overview}</p>
             <div className="flex justify-end pr-8 ">
-              <button className="modal-btn mr-6">+ Watchlater</button>
+              <button className="modal-btn mr-6" onClick={handleWatchLater}>
+                + Watchlater
+              </button>
+
               <button className="modal-btn mr-6">+ Watched</button>
               <button className="modal-btn mr-6" onClick={toggleModal}>
                 Close

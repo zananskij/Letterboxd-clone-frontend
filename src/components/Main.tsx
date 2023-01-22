@@ -4,18 +4,30 @@ import Row from "./Row"
 import Card from "./Card"
 import Banner from "./Banner"
 import { MediaCategory } from "../results"
+import { useState, useEffect } from "react"
 
 const Main = ({ Data }: { Data: MediaCategory }) => {
+  const [userId, setUserId] = useState("")
+
+  useEffect(() => {
+    setUserId(userId)
+  }, [userId])
+
   return (
     <>
       <Banner Data={Data} />
-      <Row title="Trending Now" data={Data.trending} render={(item) => <Card item={item} />} />
-      <Row title="Netflix Originals" data={Data.netflixOriginals} render={(item) => <Card item={item} />} />
-      <Row title="Top Rated" data={Data.topRated} render={(item) => <Card item={item} />} />
-      <Row title="Horror" data={Data.horror} render={(item) => <Card item={item} />} />
-      <Row title="Comedy" data={Data.comedy} render={(item) => <Card item={item} />} />
-      <Row title="Action" data={Data.action} render={(item) => <Card item={item} />} />
-      <Row title="Documenaties" data={Data.documentaries} render={(item) => <Card item={item} />} />
+      <Row title="Trending Now" data={Data.trending} render={(item) => <Card item={item} userId={userId} />} />
+
+      <Row
+        title="Netflix Originals"
+        data={Data.netflixOriginals}
+        render={(item) => <Card item={item} userId={userId} />}
+      />
+      <Row title="Top Rated" data={Data.topRated} render={(item) => <Card item={item} userId={userId} />} />
+      <Row title="Horror" data={Data.horror} render={(item) => <Card item={item} userId={userId} />} />
+      <Row title="Comedy" data={Data.comedy} render={(item) => <Card item={item} userId={userId} />} />
+      <Row title="Action" data={Data.action} render={(item) => <Card item={item} userId={userId} />} />
+      <Row title="Documenaties" data={Data.documentaries} render={(item) => <Card item={item} userId={userId} />} />
     </>
   )
 }
