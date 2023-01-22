@@ -53,7 +53,7 @@ const App = () => {
   const handleLogin = async () => {
     const { data } = await axios.post("http://localhost:8000/login", user)
     localStorage.setItem("token", data.token)
-    navigate("/test")
+    navigate("/")
   }
 
   // const handleRegister = async () => {
@@ -140,7 +140,6 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Main Data={data} />} />
         <Route path="/login" element={<Login handleLogin={handleLogin} />} />
-        {/* <Route path="/register" element={<Register handleRegister={handleRegister} />} /> */}
         <Route path="/register" element={<Register handleRegister={handleRegister} />} />
       </Routes>
     </>

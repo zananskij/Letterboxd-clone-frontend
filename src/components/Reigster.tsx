@@ -243,7 +243,7 @@ const Register: React.FC<Props> = (props) => {
       const { data } = await axios.post("http://localhost:8000/register", user)
       localStorage.setItem("token", data.token)
       console.log(`username: ${user.username} , password: ${user.password}`)
-      navigate("/test")
+      navigate("/")
     } catch (error) {
       // handle error
     }

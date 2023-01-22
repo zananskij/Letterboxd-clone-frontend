@@ -27,7 +27,7 @@ const Login: React.FC<Props> = (props) => {
     try {
       const { data } = await axios.post("http://localhost:8000/login", user)
       localStorage.setItem("token", data.token)
-      navigate("/test")
+      navigate("/")
     } catch (error) {}
   }
 
