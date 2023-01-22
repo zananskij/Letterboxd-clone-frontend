@@ -168,48 +168,129 @@ import React, { useState } from "react"
 // hahaha
 // Register.tsx
 
+// most recent
+// most recent
+// most recent
+// most recent
+// most recent
+// interface Props {
+//   registerData: {
+//     username: string
+//     password: string
+//   }
+//   setRegisterData: React.Dispatch<
+//     React.SetStateAction<{
+//       username: string
+//       password: string
+//     }>
+//   >
+//   handleRegister: (data: { username: string; password: string }) => void
+// }
+
+// const Register: React.FC<Props> = ({ registerData, setRegisterData, handleRegister }) => {
+//   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+//     e.preventDefault()
+//     handleRegister(registerData)
+//   }
+
+//   return (
+//     <form onSubmit={handleSubmit}>
+//       <label>
+//         Username:
+//         <input
+//           type="text"
+//           value={registerData.username}
+//           onChange={(e) => setRegisterData({ ...registerData, username: e.target.value })}
+//         />
+//       </label>
+//       <br />
+//       <label>
+//         Password:
+//         <input
+//           type="password"
+//           value={registerData.password}
+//           onChange={(e) => setRegisterData({ ...registerData, password: e.target.value })}
+//         />
+//       </label>
+//       <br />
+//       <button type="submit">Register</button>
+//     </form>
+//   )
+// }
+
+// export default Register
+
+// OG
+import axios from "axios"
+import { useNavigate } from "react-router-dom"
+
 interface Props {
-  registerData: {
-    username: string
-    password: string
-  }
-  setRegisterData: React.Dispatch<
-    React.SetStateAction<{
-      username: string
-      password: string
-    }>
-  >
-  handleRegister: (data: { username: string; password: string }) => void
+  handleRegister: (user: { username: string; password: string }) => void
 }
 
-const Register: React.FC<Props> = ({ registerData, setRegisterData, handleRegister }) => {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    handleRegister(registerData)
+const Register: React.FC<Props> = (props) => {
+  const [user, setUser] = useState({ id: null, username: "", password: "" })
+
+  const navigate = useNavigate()
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setUser({ ...user, [event.target.name]: event.target.value })
+  }
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    try {
+      const { data } = await axios.post("http://localhost:8000/register", user)
+      localStorage.setItem("token", data.token)
+      console.log(`username: ${user.username} , password: ${user.password}`)
+      navigate("/test")
+    } catch (error) {
+      // handle error
+    }
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Username:
-        <input
-          type="text"
-          value={registerData.username}
-          onChange={(e) => setRegisterData({ ...registerData, username: e.target.value })}
-        />
-      </label>
-      <br />
-      <label>
-        Password:
-        <input
-          type="password"
-          value={registerData.password}
-          onChange={(e) => setRegisterData({ ...registerData, password: e.target.value })}
-        />
-      </label>
-      <br />
-      <button type="submit">Register</button>
-    </form>
+    <div className="register-page">
+      <div className="register-container">
+        <h3>Register</h3>
+        <div className="register-form">
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              name="username"
+              value={user.username}
+              placeholder="Username"
+              required
+              onChange={handleChange}
+            />
+
+            <br />
+            <br />
+            <input
+              type="password"
+              name="password"
+              value={user.password}
+              placeholder="Password"
+              required
+              onChange={handleChange}
+            />
+
+            <br />
+            <div className="options-container">
+              <button type="submit" className="register-btn">
+                Register
+              </button>
+              <span>
+                Already have an account?
+                <button className="cursor-pointer text-white hover:underline" onClick={() => navigate("/login")}>
+                  Login here
+                </button>
+              </span>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   )
 }
 

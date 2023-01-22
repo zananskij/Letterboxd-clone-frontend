@@ -24,25 +24,36 @@ const App = () => {
   const navigate = useNavigate()
   const [user, setUser] = useState({ id: null, username: "", password: "" })
 
-  interface RegisterData {
-    username: any
-    password: any
+  // interface RegisterData {
+  //   username: any
+  //   password: any
+  // }
+
+  // const [registerData, setRegisterData] = useState<RegisterData>({
+  //   username: "",
+  //   password: "",
+  // })
+
+  // const handleRegister = async (data: RegisterData) => {
+  //   try {
+  //     await axios.post("https://letterboxd-clone-backend.herokuapp.com/register", data)
+  //     console.log("Successfully registered")
+  //     console.log(data)
+  //     navigate("/")
+  //   } catch (err) {
+  //     console.error(err)
+  //   }
+  // }
+  const handleRegister = async () => {
+    const { data } = await axios.post("http://localhost:8000/register", user)
+    localStorage.setItem("token", data.token)
+    navigate("/login")
   }
 
-  const [registerData, setRegisterData] = useState<RegisterData>({
-    username: "",
-    password: "",
-  })
-
-  const handleRegister = async (data: RegisterData) => {
-    try {
-      await axios.post("https://letterboxd-clone-backend.herokuapp.com/register", data)
-      console.log("Successfully registered")
-      console.log(data)
-      navigate("/")
-    } catch (err) {
-      console.error(err)
-    }
+  const handleLogin = async () => {
+    const { data } = await axios.post("http://localhost:8000/login", user)
+    localStorage.setItem("token", data.token)
+    navigate("/test")
   }
 
   // const handleRegister = async () => {
@@ -76,11 +87,11 @@ const App = () => {
 
   // handleRegister("test_username", "test_password")
 
-  const handleLogin = async () => {
-    await axios.post("https://letterboxd-clone-backend.herokuapp.com//login", user)
+  // const handleLogin = async () => {
+  //   await axios.post("https://letterboxd-clone-backend.herokuapp.com//login", user)
 
-    navigate("/")
-  }
+  //   navigate("/")
+  // }
 
   useEffect(() => {
     axios
@@ -132,9 +143,7 @@ const App = () => {
         {/* <Route path="/register" element={<Register handleRegister={handleRegister} />} /> */}
         <Route
           path="/register"
-          element={
-            <Register registerData={registerData} setRegisterData={setRegisterData} handleRegister={handleRegister} />
-          }
+          element={<Route path="/register" element={<Register handleRegister={handleRegister} />} />}
         />
       </Routes>
     </>
