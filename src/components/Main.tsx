@@ -1,67 +1,32 @@
-// import React, { useContext } from "react"
-
-// import Row from "./Row"
-// import Card from "./Card"
-// import Banner from "./Banner"
-// import { MediaCategory } from "../results"
-// import { useState, useEffect } from "react"
-// import { UserContext } from "../context"
-
-// const Main = ({ Data }: { Data: MediaCategory }) => {
-//   // const [userId, setUserId] = useState("")
-
-//   // useEffect(() => {
-//   //   setUserId(userId)
-//   // }, [userId])
-//   const { user } = useContext(UserContext)
-
-//   return (
-//     <>
-//       <div className="relative h-screen bg-gradient-to-b from-gray-900/10 to-[#010511] lg:h[140vh]">
-//         <Banner Data={Data} />
-//         <Row title="Trending Now" data={Data.trending} render={(item) => <Card item={item} user={user} />} />
-
-//         <Row
-//           title="Netflix Originals"
-//           data={Data.netflixOriginals}
-//           render={(item) => <Card item={item} user={user} />}
-//         />
-//         <Row title="Top Rated" data={Data.topRated} render={(item) => <Card item={item} user={user} />} />
-//         <Row title="Horror" data={Data.horror} render={(item) => <Card item={item} user={user} />} />
-//         <Row title="Comedy" data={Data.comedy} render={(item) => <Card item={item} user={user} />} />
-//         <Row title="Action" data={Data.action} render={(item) => <Card item={item} user={user} />} />
-//         <Row title="Documenaties" data={Data.documentaries} render={(item) => <Card item={item} user={user} />} />
-//       </div>
-//     </>
-//   )
-// }
-// export default Main
-
-import React from "react"
-
-import Row from "./Row"
+import React, { useEffect, useState } from "react"
 import Card from "./Card"
 import Banner from "./Banner"
-import { MediaCategory } from "../results"
-import { useState, useEffect } from "react"
-import { MediaData } from "../results"
+import Row from "./Row"
+import { MediaCategory, MediaData } from "../results"
 
 interface Props {
   item: MediaData
-  userId: number
 }
 
 const Main = ({ Data }: { Data: MediaCategory }) => {
-  const [userId, setUserId] = useState(2)
+  const [userId, setUserId] = useState(Number(localStorage.getItem("userId")) || 0)
 
   useEffect(() => {
-    setUserId(userId)
-  }, [userId])
+    const retrievedUserId = localStorage.getItem("userId")
+    if (retrievedUserId) {
+      setUserId(Number(retrievedUserId))
+    }
+  }, [])
+
   return (
     <>
       <div className="relative h-screen bg-gradient-to-b from-gray-900/10 to-[#010511] lg:h[140vh]">
         <Banner Data={Data} />
-        <Row title="Trending Now" data={Data.trending} render={(item) => <Card item={item} userId={userId} />} />
+        <Row
+          title="Trending Now"
+          data={Data.trending}
+          render={(item) => <Card item={item} userId={userId !== null ? userId : 0} />}
+        />
 
         <Row
           title="Netflix Originals"
@@ -78,70 +43,3 @@ const Main = ({ Data }: { Data: MediaCategory }) => {
   )
 }
 export default Main
-
-// {
-//   /* <CategoryContainer
-//         title="Netflix Originals"
-//         data={Data.netflixOriginals}
-//         render={(item) => (
-//           <Row
-//             key={item.id}
-//             id={item.id}
-//             name={item.name}
-//             title="Netflix Originals"
-//             backdrop_path={item.backdrop_path}
-//             poster_path={item.poster_path}
-//           />
-//         )}
-//       />
-//       <CategoryContainer
-//         title="Horror"
-//         data={Data.horror}
-//         render={(item) => (
-//           <Row
-//             key={item.id}
-//             id={item.id}
-//             name={item.name}
-//             title="Horror"
-//             backdrop_path={item.backdrop_path}
-//             poster_path={item.poster_path}
-//           />
-//         )}
-//       /> */
-// }
-
-// interface Props {
-//   title: string
-//   data: {
-//     page: number
-//     results: Array<{
-//       adult: boolean
-//       backdrop_path: string
-//       first_air_date?: string
-//       release_date?: string
-//       video?: boolean
-//       genre_ids: number[]
-//       id: number
-//       media_type: string
-//       name?: string
-//       title?: string
-//       origin_country: string[]
-//       original_language: string
-//       original_name: string
-//       original_title?: string
-//       overview: string
-//       popularity: number
-//       poster_path: string
-//       vote_average: number
-//       vote_count: number
-//     }>
-//   }
-//   render: (item: any) => JSX.Element
-// }
-
-// key={item.id}
-// id={item.id}
-// name={item.name}
-// title="Trending Now"
-// backdrop_path={item.backdrop_path}
-// poster_path={item.poster_path}

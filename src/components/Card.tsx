@@ -4,11 +4,6 @@ import { MediaData } from "../results"
 import axios from "axios"
 import { UserContext } from "../context"
 
-interface Props {
-  item: MediaData
-  userId: number
-}
-
 // userId: string
 
 // const Card: React.FC<Props> = ({ item, user }) => {
@@ -42,6 +37,11 @@ interface Props {
 //   item: MediaData
 // }
 
+interface Props {
+  item: MediaData
+  userId: number
+}
+
 const Card: React.FC<Props> = ({ item, userId }) => {
   const image = `https://image.tmdb.org/t/p/w500${item.backdrop_path || item.poster_path}`
 
@@ -52,16 +52,26 @@ const Card: React.FC<Props> = ({ item, userId }) => {
 
   const [watchLater, setWatchLater] = useState("")
 
-  const handleWatchLater = async (event: React.FormEvent<HTMLButtonElement>) => {
-    event.preventDefault()
+  // const handleWatchLater = async (event: React.FormEvent<HTMLButtonElement>) => {
+  //   event.preventDefault()
+  //   try {
+  //     const data = { media_id: item.id, user_id: userId }
+  //     const response = await axios.post("http://localhost:8000/watchlater", data)
+  //     setWatchLater(response.data)
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
+  const handleWatchLater = async () => {
     try {
       const data = { media_id: item.id, user_id: userId }
       const response = await axios.post("http://localhost:8000/watchlater", data)
-      setWatchLater(response.data)
+      console.log(response.data)
     } catch (error) {
       console.log(error)
     }
   }
+
   return (
     <>
       <div

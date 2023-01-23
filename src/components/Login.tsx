@@ -14,6 +14,17 @@ import { useNavigate } from "react-router-dom"
 //   error: string | null
 // }
 
+// interface Props {
+//   handleLogin: (user: { username: string; password: string }) => void
+// }
+// interface State {
+//   user: {
+//     username: string
+//     password: string
+//   }
+//   error: string | null
+// }
+
 interface User {
   id: number | null
   username: string
@@ -49,6 +60,8 @@ interface User {
 //       setError("Error logging in, please try again.")
 //     }
 //   }
+// const parsedData = JSON.parse(data)
+// console.log(parsedData.userId)
 
 const Login: React.FC = () => {
   const { user, setUser } = useContext(UserContext)
@@ -65,10 +78,11 @@ const Login: React.FC = () => {
       const { data } = await axios.post("http://localhost:8000/login", user)
       localStorage.setItem("userId", data.userId)
       localStorage.setItem("token", data.token)
-      setUser(data.user)
+      // setUser(data.user)
       console.log(data.token)
       console.log(data.userId)
       console.log(user.username)
+
       navigate("/")
     } catch (error) {}
   }
@@ -137,17 +151,6 @@ export default Login
 //     console.log(error)
 //     setError("Error logging in, please try again.")
 //   }
-// }
-
-// interface Props {
-//   handleLogin: (user: { username: string; password: string }) => void
-// }
-// interface State {
-//   user: {
-//     username: string
-//     password: string
-//   }
-//   error: string | null
 // }
 
 // const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
