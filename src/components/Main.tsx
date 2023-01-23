@@ -3,12 +3,20 @@ import Card from "./Card"
 import Banner from "./Banner"
 import Row from "./Row"
 import { MediaCategory, MediaData } from "../results"
+import WatchLater from "./watchlater"
 
-interface Props {
-  item: MediaData
+// interface Props {
+//   item: MediaData
+//   watchLaterData: { media_id: number; user_id: number }[]
+//   mediaData: MediaData[]
+// }
+interface MainProps {
+  Data: MediaCategory
+  watchLaterData: { media_id: number; user_id: number }[]
+  mediaData: MediaData[]
 }
-
-const Main = ({ Data }: { Data: MediaCategory }) => {
+// const Main = ({ Data }: { Data: MediaCategory }) => {
+const Main = ({ Data, watchLaterData, mediaData }: MainProps) => {
   const [userId, setUserId] = useState(Number(localStorage.getItem("userId")) || 0)
 
   useEffect(() => {
@@ -22,6 +30,7 @@ const Main = ({ Data }: { Data: MediaCategory }) => {
     <>
       <div className="relative h-screen bg-gradient-to-b from-gray-900/10 to-[#010511] lg:h[140vh]">
         <Banner Data={Data} />
+        <WatchLater watchLaterData={watchLaterData} mediaData={mediaData} />
         <Row
           title="Trending Now"
           data={Data.trending}

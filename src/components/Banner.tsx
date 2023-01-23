@@ -17,12 +17,12 @@ function Banner({ Data }: Props) {
   }, [Data])
 
   return (
-    <div className="flex flex-col space-y-2 py-16 md:space-y-4 lg:h-[65vh] lg:justify-end lg:pb-12">
+    <div className="flex flex-col space-y-2 py-12 md:space-y-4 lg:h-[65vh] lg:justify-end lg:pb-12">
       <div className="absolute top-0 left-0 -z-10 h-[95vh] w-screen">
         <img className="object-cover" src={`${baseURL}${movie?.backdrop_path || movie?.poster_path}`} alt="#" />
       </div>
-      <div className="banner-description relative pl-4 pb-20 lg:space-y-24 lg:pl-16">
-        <h1 className="text-2xl md:text-4xl lg:text-7xl font-bold">
+      <div className="banner-description relative pl-4 pb-5 lg:space-y-24 lg:pl-16">
+        <h1 className="text-2xl md:text-2xl lg:text-4xl font-bold">
           {movie?.title || movie?.name || movie?.original_name}
         </h1>
         <p className="overview-text max-w-xs text-xs md:max-w-lg md:text-lg lg:max-w-2xl lg:text-2xl">

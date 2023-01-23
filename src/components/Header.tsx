@@ -33,12 +33,12 @@ const Header = () => {
           <li className="headerLink">
             <a href="/">Home</a>
           </li>
-          <li className="headerLink">Login / Register if not signed in </li>
-          <li className="headerLink">Render signout button if user set</li>
-          <li className="headerLink">{user.username && `Welcome back, ${user.username}`}</li>
+          <li className="headerLink">
+            <a href="/login">Login</a>
+          </li>
+          <li className="headerLink px-5">{user.username && `Welcome back, ${user.username}`}</li>
         </ul>
         <div className="flex justify-end space-x-4 text-sm">
-          <MagnifyingGlassIcon className="headerLink h-7 w-7 sm:inline text-white" />
           <Link to={isLoggedIn ? "//login" : "/register"}>
             <UserIcon className=" headerLink h-7 w-7 text-white" />
           </Link>

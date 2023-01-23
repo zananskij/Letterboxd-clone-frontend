@@ -4,39 +4,6 @@ import { MediaData } from "../results"
 import axios from "axios"
 import { UserContext } from "../context"
 
-// userId: string
-
-// const Card: React.FC<Props> = ({ item, user }) => {
-//   const image = `https://image.tmdb.org/t/p/w500${item.backdrop_path || item.poster_path}`
-
-//   const [isModalOpen, setIsModalOpen] = useState(false)
-//   const toggleModal = () => {
-//     setIsModalOpen(!isModalOpen)
-//   }
-
-//   const [watchLater, setWatchLater] = useState("")
-
-//   const handleWatchLater = async (event: React.FormEvent<HTMLButtonElement>) => {
-//     event.preventDefault()
-//     if (!user || !user.id) {
-//       console.log("User is not logged in or ID is missing")
-//       return
-//     }
-//     try {
-//       const data = { media_id: item.id, user_id: user.id }
-//       const response = await axios.post("http://localhost:8000/watchlater", data)
-//       setWatchLater(response.data)
-//     } catch (error) {
-//       console.log(error)
-//     }
-//   }
-
-//   return (
-
-// interface Props {
-//   item: MediaData
-// }
-
 interface Props {
   item: MediaData
   userId: number
@@ -50,18 +17,20 @@ const Card: React.FC<Props> = ({ item, userId }) => {
     setIsModalOpen(!isModalOpen)
   }
 
-  const [watchLater, setWatchLater] = useState("")
+  const [watchLaterList, setWatchLaterList] = useState([])
+  const [watchLaterMedia, setWatchLaterMedia] = useState()
+  useEffect(() => {
+    // Make the GET request to the backend, passing the user's ID
+    axios
+      .get(`http://localhost:8000/watchlater/${userId}`)
+      .then((response) => {
+        setWatchLaterList(response.data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }, [userId])
 
-  // const handleWatchLater = async (event: React.FormEvent<HTMLButtonElement>) => {
-  //   event.preventDefault()
-  //   try {
-  //     const data = { media_id: item.id, user_id: userId }
-  //     const response = await axios.post("http://localhost:8000/watchlater", data)
-  //     setWatchLater(response.data)
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
   const handleWatchLater = async () => {
     try {
       const data = { media_id: item.id, user_id: userId }
@@ -74,6 +43,9 @@ const Card: React.FC<Props> = ({ item, userId }) => {
 
   return (
     <>
+      <div>
+        <div>{watchLaterMedia && <div>{watchLaterMedia}</div>}</div>
+      </div>
       <div
         className="media-element rounded-sm md:hover:scale-105 transition duration-200 ease-out pl-2"
         style={{ width: "240px", flexShrink: 0, flexBasis: 0 }}
@@ -83,7 +55,7 @@ const Card: React.FC<Props> = ({ item, userId }) => {
       </div>
       {isModalOpen && (
         <div className="modal-overlay">
-          <div className="modal-content w-[60vh] h-[50vh]">
+          <div className="modal-content w-[70vh] h-[60vh]">
             <p className="text-center py-4  text-4xl font-bold">{item.name || item.title}</p>
             <div className="flex justify-between pt-2 px-2 text-1xl">
               <p>{item.media_type}</p>
@@ -96,7 +68,7 @@ const Card: React.FC<Props> = ({ item, userId }) => {
                 + Watchlater
               </button>
 
-              <button className="modal-btn mr-6">+ Watched</button>
+              <button className="modal-btn mr-6">+ MyList</button>
               <button className="modal-btn mr-6" onClick={toggleModal}>
                 Close
               </button>
@@ -109,45 +81,3 @@ const Card: React.FC<Props> = ({ item, userId }) => {
 }
 
 export default Card
-
-// const handleWatchLater = async () => {
-//   try {
-//     const data = { media_id: item.id, user_id: userId }
-//     const response = await fetch("/watchlater", {
-//       method: "POST",
-//       headers: { "Content-Type": "application/json" },
-//       body: JSON.stringify(data),
-//     })
-//     const result = await response.json()
-//     console.log(result)
-//     console.log("Media added to watch later list")
-//   } catch (error) {
-//     console.error(error)
-//   }
-// }
-
-// const handleWatchLater = async (event: React.FormEvent<HTMLButtonElement>) => {
-//   event.preventDefault()
-//   try {
-//     const data = { media_id: item.id, userId }
-//     const response = await axios.post("http://localhost:8000/watchlater", data)
-//     setWatchLater(response.data)
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }
-
-// const handleWatchLater = async (event: React.FormEvent<HTMLButtonElement>) => {
-//   event.preventDefault()
-//   if (!user || !user.id) {
-//     console.log("User is not logged in or ID is missing")
-//     return
-//   }
-//   try {
-//     const data = { media_id: item.id, user_id: user.id }
-//     const response = await axios.post("http://localhost:8000/watchlater", data)
-//     setWatchLater(response.data)
-//   } catch (error) {
-//     console.log(error)
-//   }
-// }

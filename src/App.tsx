@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import { Route, Routes, Link, useNavigate, RouteProps } from "react-router-dom"
 import { MediaCategory } from "./results"
+import { MediaData } from "./results"
 import Login from "./components/Login"
 import Register from "./components/Reigster"
 import Main from "./components/Main"
@@ -32,6 +33,10 @@ const App = () => {
     documentaries: { page: 0, data: [] },
   })
   const [error, setError] = useState<string | null>(null)
+  // const [watchLaterData, setWatchLaterData] = useState<{ media_id: number; user_id: number }[]>([])
+  // const [mediaData, setMediaData] = useState<MediaData[]>([])
+  const [watchLaterData, setWatchLaterData] = useState([])
+  const [mediaData, setMediaData] = useState([])
 
   const navigate = useNavigate()
   // const [user, setUser] = useState({ id: null, username: "", password: "" })
@@ -50,6 +55,23 @@ const App = () => {
   }
 
   useEffect(() => {
+    axios
+      .get("http://localhost:8000/watchLaterData")
+      .then((response) => {
+        setWatchLaterData(response.data)
+      })
+      .catch((error) => {
+        console.log("Error fetching watch later data:", error)
+      })
+    axios
+      .get("http://localhost:8000/mediaData")
+      .then((response) => {
+        setMediaData(response.data)
+      })
+      .catch((error) => {
+        console.log("Error fetching media data:", error)
+      })
+
     axios
       .get("https://letterboxd-clone-backend.herokuapp.com/")
       .then((response) => {
@@ -94,7 +116,7 @@ const App = () => {
     <UserProvider value={{ user, setUser }}>
       <Header />
       <Routes>
-        <Route path="/" element={<Main Data={data} />} />
+        <Route path="/" element={<Main Data={data} watchLaterData={watchLaterData} mediaData={mediaData} />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>

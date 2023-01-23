@@ -110,7 +110,8 @@ box-icon {
   font-size: 15px;
   height: 45px;
   outline: none;
-  width: 100%;
+  width: 90%;
+  margin-top: 5px;
   color: black;
   background: rgba(255, 255, 255, 0.7);
   cursor: pointer;
@@ -157,10 +158,11 @@ box-icon {
 }
 
 .modal-btn {
-  height: 50px;
-  width: 60px;
+  height: 55px;
+  width: 70px;
   border-radius: 15%;
   color: White;
   background-color: red;
-  font-size: 15px;
+  font-size: 10px;
+  padding: 2%;
 }
