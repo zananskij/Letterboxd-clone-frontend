@@ -9,6 +9,36 @@ interface User {
   password: string
 }
 
+// const Login: React.FC = () => {
+//   const [user, setUser] = useState<User>({ id: null, username: "", password: "" })
+//   const [error, setError] = useState<string | null>(null)
+//   const navigate = useNavigate()
+
+//   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+//     setUser({ ...user, [event.target.name]: event.target.value })
+//   }
+
+//   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+//     event.preventDefault()
+//     try {
+//       const { data } = await axios.post("http://localhost:8000/login", user)
+//       if (data.newToken && data.userId) {
+//         localStorage.setItem("token", data.newToken)
+//         setUser({
+//           ...user,
+//           id: data.userId,
+//         })
+
+//         navigate("/")
+//       } else {
+//         console.log("Token or userId is missing in the response data.")
+//       }
+//     } catch (error) {
+//       console.log(error)
+//       setError("Error logging in, please try again.")
+//     }
+//   }
+
 const Login: React.FC = () => {
   const { user, setUser } = useContext(UserContext)
   const [error, setError] = useState<string | null>(null)
@@ -17,12 +47,16 @@ const Login: React.FC = () => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, [event.target.name]: event.target.value })
   }
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     try {
       const { data } = await axios.post("http://localhost:8000/login", user)
+      localStorage.setItem("userId", data.userId)
       localStorage.setItem("token", data.token)
       setUser(data.user)
+      console.log(data.token)
+      console.log(data.userId)
       console.log(user.username)
       navigate("/")
     } catch (error) {}
@@ -67,7 +101,6 @@ const Login: React.FC = () => {
               </span>
             </div>
           </form>
-          {error && <p>{error}</p>}
         </div>
       </div>
     </div>
@@ -75,6 +108,25 @@ const Login: React.FC = () => {
 }
 
 export default Login
+
+// const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+//   event.preventDefault()
+//   try {
+//     const { data } = await axios.post("http://localhost:8000/login", user)
+//     console.log(data)
+//     if (data.user && data.user.id) {
+//       localStorage.setItem("token", data.newToken)
+//       // setUser({ ...user, id: data.userId })
+//       setUser({ ...data.user, id: data.userId })
+//       navigate("/")
+//     } else {
+//       console.log("User id is missing in the response data.")
+//     }
+//   } catch (error) {
+//     console.log(error)
+//     setError("Error logging in, please try again.")
+//   }
+// }
 
 // interface Props {
 //   handleLogin: (user: { username: string; password: string }) => void
@@ -86,3 +138,29 @@ export default Login
 //   }
 //   error: string | null
 // }
+
+// const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+//   event.preventDefault()
+//   try {
+//     if (user.id) {
+
+//     }
+//     const { data } = await axios.post("http://localhost:8000/login", user)
+//     localStorage.setItem("token", data.token)
+//     // setUser(data.user)
+//     setUser({ ...data.user, id: data.user_id })
+//     console.log(`Welcome back ${user.username}`)
+//     navigate("/")
+//   } catch (error) {}
+// }
+// const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+//   event.preventDefault()
+//   try {
+//     if (user.id) {
+//       const { data } = await axios.post("http://localhost:8000/login", {
+//         username: user.username,
+//         password: user.password,
+//       })
+//       localStorage.setItem("token", data.token)
+//       setUser(data.user)
+//       navigate("/")

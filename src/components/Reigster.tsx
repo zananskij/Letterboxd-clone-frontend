@@ -234,11 +234,30 @@ interface User {
   username: string
   password: string
 }
+// rib
+// const Register: React.FC = () => {
+//   // const [user, setUser] = useState({ id: null, username: "", password: "" })
+//   const { user, setUser } = useContext(UserContext)
 
+//   const navigate = useNavigate()
+
+//   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+//     setUser({ ...user, [event.target.name]: event.target.value })
+//   }
+
+//   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+//     event.preventDefault()
+//     try {
+//       const { data } = await axios.post("http://localhost:8000/register", user)
+//       localStorage.setItem("token", data.token)
+//       console.log(`username: ${user.username} , password: ${user.password}`)
+//       navigate("/")
+//     } catch (error) {
+//       // handle error
+//     }
+//   }
 const Register: React.FC = () => {
-  // const [user, setUser] = useState({ id: null, username: "", password: "" })
   const { user, setUser } = useContext(UserContext)
-
   const navigate = useNavigate()
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -248,7 +267,10 @@ const Register: React.FC = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     try {
-      const { data } = await axios.post("http://localhost:8000/register", user)
+      const { data } = await axios.post("http://localhost:8000/register", {
+        username: user.username,
+        password: user.password,
+      })
       localStorage.setItem("token", data.token)
       console.log(`username: ${user.username} , password: ${user.password}`)
       navigate("/")

@@ -1,3 +1,42 @@
+// import React, { useContext } from "react"
+
+// import Row from "./Row"
+// import Card from "./Card"
+// import Banner from "./Banner"
+// import { MediaCategory } from "../results"
+// import { useState, useEffect } from "react"
+// import { UserContext } from "../context"
+
+// const Main = ({ Data }: { Data: MediaCategory }) => {
+//   // const [userId, setUserId] = useState("")
+
+//   // useEffect(() => {
+//   //   setUserId(userId)
+//   // }, [userId])
+//   const { user } = useContext(UserContext)
+
+//   return (
+//     <>
+//       <div className="relative h-screen bg-gradient-to-b from-gray-900/10 to-[#010511] lg:h[140vh]">
+//         <Banner Data={Data} />
+//         <Row title="Trending Now" data={Data.trending} render={(item) => <Card item={item} user={user} />} />
+
+//         <Row
+//           title="Netflix Originals"
+//           data={Data.netflixOriginals}
+//           render={(item) => <Card item={item} user={user} />}
+//         />
+//         <Row title="Top Rated" data={Data.topRated} render={(item) => <Card item={item} user={user} />} />
+//         <Row title="Horror" data={Data.horror} render={(item) => <Card item={item} user={user} />} />
+//         <Row title="Comedy" data={Data.comedy} render={(item) => <Card item={item} user={user} />} />
+//         <Row title="Action" data={Data.action} render={(item) => <Card item={item} user={user} />} />
+//         <Row title="Documenaties" data={Data.documentaries} render={(item) => <Card item={item} user={user} />} />
+//       </div>
+//     </>
+//   )
+// }
+// export default Main
+
 import React from "react"
 
 import Row from "./Row"
@@ -5,33 +44,41 @@ import Card from "./Card"
 import Banner from "./Banner"
 import { MediaCategory } from "../results"
 import { useState, useEffect } from "react"
+import { MediaData } from "../results"
+
+interface Props {
+  item: MediaData
+  userId: number
+}
 
 const Main = ({ Data }: { Data: MediaCategory }) => {
-  const [userId, setUserId] = useState("")
+  const [userId, setUserId] = useState(2)
 
   useEffect(() => {
     setUserId(userId)
   }, [userId])
-
   return (
     <>
-      <Banner Data={Data} />
-      <Row title="Trending Now" data={Data.trending} render={(item) => <Card item={item} userId={userId} />} />
+      <div className="relative h-screen bg-gradient-to-b from-gray-900/10 to-[#010511] lg:h[140vh]">
+        <Banner Data={Data} />
+        <Row title="Trending Now" data={Data.trending} render={(item) => <Card item={item} userId={userId} />} />
 
-      <Row
-        title="Netflix Originals"
-        data={Data.netflixOriginals}
-        render={(item) => <Card item={item} userId={userId} />}
-      />
-      <Row title="Top Rated" data={Data.topRated} render={(item) => <Card item={item} userId={userId} />} />
-      <Row title="Horror" data={Data.horror} render={(item) => <Card item={item} userId={userId} />} />
-      <Row title="Comedy" data={Data.comedy} render={(item) => <Card item={item} userId={userId} />} />
-      <Row title="Action" data={Data.action} render={(item) => <Card item={item} userId={userId} />} />
-      <Row title="Documenaties" data={Data.documentaries} render={(item) => <Card item={item} userId={userId} />} />
+        <Row
+          title="Netflix Originals"
+          data={Data.netflixOriginals}
+          render={(item) => <Card item={item} userId={userId} />}
+        />
+        <Row title="Top Rated" data={Data.topRated} render={(item) => <Card item={item} userId={userId} />} />
+        <Row title="Horror" data={Data.horror} render={(item) => <Card item={item} userId={userId} />} />
+        <Row title="Comedy" data={Data.comedy} render={(item) => <Card item={item} userId={userId} />} />
+        <Row title="Action" data={Data.action} render={(item) => <Card item={item} userId={userId} />} />
+        <Row title="Documenaties" data={Data.documentaries} render={(item) => <Card item={item} userId={userId} />} />
+      </div>
     </>
   )
 }
 export default Main
+
 // {
 //   /* <CategoryContainer
 //         title="Netflix Originals"

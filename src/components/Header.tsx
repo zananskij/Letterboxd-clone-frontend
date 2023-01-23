@@ -27,19 +27,20 @@ const Header = () => {
   }, [])
 
   return (
-    <header className={`${scroll && "bg-red-500"}`}>
+    <header className={`${scroll && "bg-black"}`}>
       <div className="flex justify-between space-x-2 md:space-x-10">
-        <ul className="space-x-4 md:flex">
-          <li className="headerLink">Home</li>
-          <li className="headerLink">My List</li>
-          <li className="headerLink">Watchlater</li>
-          <li className="headerLink">Trending</li>
+        <ul className="space-x-4 sm:flex">
+          <li className="headerLink">
+            <a href="/">Home</a>
+          </li>
+          <li className="headerLink">Login / Register if not signed in </li>
+          <li className="headerLink">Render signout button if user set</li>
           <li className="headerLink">{user.username && `Welcome back, ${user.username}`}</li>
         </ul>
         <div className="flex justify-end space-x-4 text-sm">
-          <MagnifyingGlassIcon className="hidden h-5 w-5 sm:inline text-white" />
-          <Link to={isLoggedIn ? "/profile" : "/login"}>
-            <UserIcon className="h-5 w-5 text-white" />
+          <MagnifyingGlassIcon className="headerLink h-7 w-7 sm:inline text-white" />
+          <Link to={isLoggedIn ? "//login" : "/register"}>
+            <UserIcon className=" headerLink h-7 w-7 text-white" />
           </Link>
         </div>
       </div>

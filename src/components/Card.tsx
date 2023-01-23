@@ -1,12 +1,46 @@
 import React from "react"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import { MediaData } from "../results"
 import axios from "axios"
+import { UserContext } from "../context"
 
 interface Props {
   item: MediaData
-  userId: string
+  userId: number
 }
+
+// userId: string
+
+// const Card: React.FC<Props> = ({ item, user }) => {
+//   const image = `https://image.tmdb.org/t/p/w500${item.backdrop_path || item.poster_path}`
+
+//   const [isModalOpen, setIsModalOpen] = useState(false)
+//   const toggleModal = () => {
+//     setIsModalOpen(!isModalOpen)
+//   }
+
+//   const [watchLater, setWatchLater] = useState("")
+
+//   const handleWatchLater = async (event: React.FormEvent<HTMLButtonElement>) => {
+//     event.preventDefault()
+//     if (!user || !user.id) {
+//       console.log("User is not logged in or ID is missing")
+//       return
+//     }
+//     try {
+//       const data = { media_id: item.id, user_id: user.id }
+//       const response = await axios.post("http://localhost:8000/watchlater", data)
+//       setWatchLater(response.data)
+//     } catch (error) {
+//       console.log(error)
+//     }
+//   }
+
+//   return (
+
+// interface Props {
+//   item: MediaData
+// }
 
 const Card: React.FC<Props> = ({ item, userId }) => {
   const image = `https://image.tmdb.org/t/p/w500${item.backdrop_path || item.poster_path}`
@@ -17,17 +51,17 @@ const Card: React.FC<Props> = ({ item, userId }) => {
   }
 
   const [watchLater, setWatchLater] = useState("")
+
   const handleWatchLater = async (event: React.FormEvent<HTMLButtonElement>) => {
     event.preventDefault()
     try {
-      const data = { media_id: item.id, userId }
+      const data = { media_id: item.id, user_id: userId }
       const response = await axios.post("http://localhost:8000/watchlater", data)
       setWatchLater(response.data)
     } catch (error) {
       console.log(error)
     }
   }
-
   return (
     <>
       <div
@@ -79,5 +113,31 @@ export default Card
 //     console.log("Media added to watch later list")
 //   } catch (error) {
 //     console.error(error)
+//   }
+// }
+
+// const handleWatchLater = async (event: React.FormEvent<HTMLButtonElement>) => {
+//   event.preventDefault()
+//   try {
+//     const data = { media_id: item.id, userId }
+//     const response = await axios.post("http://localhost:8000/watchlater", data)
+//     setWatchLater(response.data)
+//   } catch (error) {
+//     console.log(error)
+//   }
+// }
+
+// const handleWatchLater = async (event: React.FormEvent<HTMLButtonElement>) => {
+//   event.preventDefault()
+//   if (!user || !user.id) {
+//     console.log("User is not logged in or ID is missing")
+//     return
+//   }
+//   try {
+//     const data = { media_id: item.id, user_id: user.id }
+//     const response = await axios.post("http://localhost:8000/watchlater", data)
+//     setWatchLater(response.data)
+//   } catch (error) {
+//     console.log(error)
 //   }
 // }
