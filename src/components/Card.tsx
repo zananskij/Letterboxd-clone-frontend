@@ -17,25 +17,41 @@ const Card: React.FC<Props> = ({ item, userId }) => {
     setIsModalOpen(!isModalOpen)
   }
 
-  const [watchLaterList, setWatchLaterList] = useState([])
-  const [watchLaterMedia, setWatchLaterMedia] = useState()
-  useEffect(() => {
-    // Make the GET request to the backend, passing the user's ID
-    axios
-      .get(`http://localhost:8000/watchlater/${userId}`)
-      .then((response) => {
-        setWatchLaterList(response.data)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-  }, [userId])
+  // const [watchLaterList, setWatchLaterList] = useState([])
+  //  v43434
+  // const [watchLaterList, setWatchLaterList] = useState<{ media_id: number; user_id: number }[]>([])
 
+  // const [watchLaterMedia, setWatchLaterMedia] = useState()
+  // useEffect(() => {
+  //   // Make the GET request to the backend, passing the user's ID
+  //   axios
+  //     .get(`http://localhost:8000/watchlater/${userId}`)
+  //     .then((response) => {
+  //       setWatchLaterList(response.data)
+  //     })
+  //     .catch((error) => {
+  //       console.log(error)
+  //     })
+  // }, [userId])
+  // v43434
+
+  // const handleWatchLater = async () => {
+  //   try {
+  //     const data = { media_id: item.id, user_id: userId }
+  //     const response = await axios.post("http://localhost:8000/watchlater", data)
+  //     console.log(response.data)
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
   const handleWatchLater = async () => {
     try {
       const data = { media_id: item.id, user_id: userId }
       const response = await axios.post("http://localhost:8000/watchlater", data)
       console.log(response.data)
+
+      // Update the watchLaterList state
+      // setWatchLaterList([...watchLaterList, data])
     } catch (error) {
       console.log(error)
     }
@@ -43,9 +59,7 @@ const Card: React.FC<Props> = ({ item, userId }) => {
 
   return (
     <>
-      <div>
-        <div>{watchLaterMedia && <div>{watchLaterMedia}</div>}</div>
-      </div>
+      <div>{/* <div>{watchLaterMedia && <div>{watchLaterMedia}</div>}</div> */}</div>
       <div
         className="media-element rounded-sm md:hover:scale-105 transition duration-200 ease-out pl-2"
         style={{ width: "240px", flexShrink: 0, flexBasis: 0 }}

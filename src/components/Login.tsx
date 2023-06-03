@@ -1,8 +1,3 @@
-import React, { useState, useContext } from "react"
-import { UserContext } from "../context"
-import axios from "axios"
-import { useNavigate } from "react-router-dom"
-
 // interface Props {
 //   handleLogin: (user: { username: string; password: string }) => void
 // }
@@ -13,6 +8,11 @@ import { useNavigate } from "react-router-dom"
 //   }
 //   error: string | null
 // }
+
+import React, { useState, useContext } from "react"
+import { UserContext } from "../context"
+import axios from "axios"
+import { useNavigate } from "react-router-dom"
 
 interface User {
   id: number | null
@@ -36,7 +36,7 @@ const Login: React.FC = () => {
       localStorage.setItem("userId", data.userId)
       localStorage.setItem("token", data.token)
       // setUser(data.user)
-      console.log(data.token)
+      // console.log(data.token)
       console.log(data.userId)
       console.log(user.username)
 

@@ -55,25 +55,26 @@ const App = () => {
   }
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8000/watchLaterData")
-      .then((response) => {
-        setWatchLaterData(response.data)
-      })
-      .catch((error) => {
-        console.log("Error fetching watch later data:", error)
-      })
-    axios
-      .get("http://localhost:8000/mediaData")
-      .then((response) => {
-        setMediaData(response.data)
-      })
-      .catch((error) => {
-        console.log("Error fetching media data:", error)
-      })
+    // axios
+    //   .get("http://localhost:8000/watchLaterData")
+    //   .then((response) => {
+    //     setWatchLaterData(response.data)
+    //   })
+    //   .catch((error) => {
+    //     console.log("Error fetching watch later data:", error)
+    //   })
+    // axios
+    //   .get("http://localhost:8000/mediaData")
+    //   .then((response) => {
+    //     setMediaData(response.data)
+    //   })
+    //   .catch((error) => {
+    //     console.log("Error fetching media data:", error)
+    //   })
 
     axios
-      .get("https://letterboxd-clone-backend.herokuapp.com/")
+      // .get("https://letterboxd-clone-backend.herokuapp.com/")
+      .get("http://localhost:8000/")
       .then((response) => {
         console.log(response)
         setData({
