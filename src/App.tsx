@@ -10,6 +10,9 @@ import Register from "./components/Reigster"
 import Main from "./components/Main"
 import Header from "./components/Header"
 import UserProvider from "./context"
+import WatchLaterProvider from "./WatchLaterContext"
+import { WatchLaterData } from "./WatchLaterContext"
+
 import { Dispatch, SetStateAction } from "react"
 
 interface User {
@@ -35,7 +38,8 @@ const App = () => {
   const [error, setError] = useState<string | null>(null)
   // const [watchLaterData, setWatchLaterData] = useState<{ media_id: number; user_id: number }[]>([])
   // const [mediaData, setMediaData] = useState<MediaData[]>([])
-  const [watchLaterData, setWatchLaterData] = useState([])
+  // const [watchLaterData, setWatchLaterData] = useState([])
+  const [watchLaterData, setWatchLaterData] = useState<WatchLaterData[]>([])
   const [mediaData, setMediaData] = useState([])
 
   const navigate = useNavigate()
@@ -115,12 +119,14 @@ const App = () => {
 
   return (
     <UserProvider value={{ user, setUser }}>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Main Data={data} watchLaterData={watchLaterData} mediaData={mediaData} />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-      </Routes>
+      <WatchLaterProvider value={[watchLaterData, setWatchLaterData]}>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Main Data={data} watchLaterData={watchLaterData} mediaData={mediaData} />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Routes>
+      </WatchLaterProvider>
     </UserProvider>
   )
 }

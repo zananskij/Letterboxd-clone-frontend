@@ -28,20 +28,34 @@ const Login: React.FC = () => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, [event.target.name]: event.target.value })
   }
+  // previously
+  // const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  //   event.preventDefault()
+  //   try {
+  //     const { data } = await axios.post("http://localhost:8000/login", user)
+  //     localStorage.setItem("userId", data.userId)
+  //     localStorage.setItem("token", data.token)
+  //     // setUser(data.user)
+  //     // console.log(data.token)
+  //     console.log(data.userId)
+  //     console.log(user.username)
 
+  //     navigate("/")
+  //   } catch (error) {}
+  // }
+
+  // new
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     try {
       const { data } = await axios.post("http://localhost:8000/login", user)
-      localStorage.setItem("userId", data.userId)
       localStorage.setItem("token", data.token)
-      // setUser(data.user)
-      // console.log(data.token)
-      console.log(data.userId)
-      console.log(user.username)
-
+      console.log(`userId: ${data.user.id}`)
+      console.log(`username: ${data.user.username}`)
       navigate("/")
-    } catch (error) {}
+    } catch (error) {
+      // Handle error
+    }
   }
 
   return (

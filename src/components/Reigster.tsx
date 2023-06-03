@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react"
 import { UserContext } from "../context"
 
 import axios from "axios"
+
 import { useNavigate } from "react-router-dom"
 
 // interface Props {
@@ -15,12 +16,29 @@ interface User {
 
 const Register: React.FC = () => {
   const { user, setUser } = useContext(UserContext)
+
   const navigate = useNavigate()
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, [event.target.name]: event.target.value })
   }
+  // previously
+  // const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  //   event.preventDefault()
+  //   try {
+  //     const { data } = await axios.post("http://localhost:8000/register", {
+  //       username: user.username,
+  //       password: user.password,
+  //     })
+  //     localStorage.setItem("token", data.token)
+  //     console.log(`username: ${user.username} , password: ${user.password}`)
+  //     navigate("/")
+  //   } catch (error) {
+  //     // check error
+  //   }
+  // }
 
+  // new
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     try {
@@ -29,10 +47,11 @@ const Register: React.FC = () => {
         password: user.password,
       })
       localStorage.setItem("token", data.token)
-      console.log(`username: ${user.username} , password: ${user.password}`)
+      console.log(`userId: ${data.user.id}`)
+      console.log(`username: ${data.user.username}`)
       navigate("/")
     } catch (error) {
-      // check error
+      // Handle error
     }
   }
 
