@@ -24,10 +24,12 @@ const Card: React.FC<Props> = ({ item }) => {
       try {
         const data = { media_id: item.id, user_id: user.id }
 
+        // const response = await axios.post(`http://localhost:8000/users/${user.username}/watchlater`, data)
         const response = await axios.post(`http://localhost:8000/users/${user.username}/watchlater`, data)
 
         if (response.status === 200) {
           setWatchLaterData([...watchLaterData, data])
+          console.log("Watch later context data: ", watchLaterData) // Add this line 3
         }
       } catch (error) {
         console.log(error)

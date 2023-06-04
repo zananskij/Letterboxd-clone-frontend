@@ -89,7 +89,7 @@
 
 // export default UserProvider
 
-// new backend 4.0
+// new backend 4.
 import React, { createContext, useState, Dispatch, SetStateAction } from "react"
 
 interface User {
@@ -97,20 +97,43 @@ interface User {
   username: string
   password: string
 }
-interface UserProviderProps {
-  children: React.ReactNode
-  value: { user: User; setUser: Dispatch<SetStateAction<User>> }
+
+interface WatchLaterData {
+  user_id: number
+  media_id: number
 }
 
-export const UserContext = createContext<{ user: User; setUser: React.Dispatch<React.SetStateAction<User>> }>({
+interface UserContext {
+  user: User
+  setUser: React.Dispatch<React.SetStateAction<User>>
+  watchLaterData: WatchLaterData[]
+  setWatchLaterData: React.Dispatch<React.SetStateAction<WatchLaterData[]>>
+}
+
+interface UserProviderProps {
+  children: React.ReactNode
+  value: {
+    user: User
+    setUser: Dispatch<SetStateAction<User>>
+    watchLaterData: WatchLaterData[]
+    setWatchLaterData: Dispatch<SetStateAction<WatchLaterData[]>>
+  }
+}
+
+export const UserContext = createContext<UserContext>({
   user: { id: null, username: "", password: "" },
   setUser: () => {},
+  watchLaterData: [],
+  setWatchLaterData: () => {},
 })
 
 const UserProvider: React.FC<UserProviderProps> = ({ children, value }) => {
   const [user, setUser] = useState<User>(value.user)
+  const [watchLaterData, setWatchLaterData] = useState<WatchLaterData[]>(value.watchLaterData) // Update this line
 
-  return <UserContext.Provider value={{ user, setUser }}>{children}</UserContext.Provider>
+  return (
+    <UserContext.Provider value={{ user, setUser, watchLaterData, setWatchLaterData }}>{children}</UserContext.Provider>
+  )
 }
 
 export default UserProvider
