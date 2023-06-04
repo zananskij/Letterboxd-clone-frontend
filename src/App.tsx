@@ -138,14 +138,14 @@ const App = () => {
 
   return (
     <UserProvider value={{ user, setUser, watchLaterData, setWatchLaterData }}>
-      <WatchLaterProvider value={[watchLaterData, setWatchLaterData]}>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Main Data={data} watchLaterData={watchLaterData} mediaData={mediaData} />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-        </Routes>
-      </WatchLaterProvider>
+      {/* <WatchLaterProvider value={[watchLaterData, setWatchLaterData]}> */}
+      <Header />
+      <Routes>
+        <Route path="/" element={<Main Data={data} watchLaterData={watchLaterData} mediaData={mediaData} />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+      </Routes>
+      {/* </WatchLaterProvider> */}
     </UserProvider>
   )
 }

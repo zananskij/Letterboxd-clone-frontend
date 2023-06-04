@@ -128,12 +128,16 @@ export const UserContext = createContext<UserContext>({
 })
 
 const UserProvider: React.FC<UserProviderProps> = ({ children, value }) => {
-  const [user, setUser] = useState<User>(value.user)
-  const [watchLaterData, setWatchLaterData] = useState<WatchLaterData[]>(value.watchLaterData) // Update this line
-
-  return (
-    <UserContext.Provider value={{ user, setUser, watchLaterData, setWatchLaterData }}>{children}</UserContext.Provider>
-  )
+  return <UserContext.Provider value={value}>{children}</UserContext.Provider>
 }
 
 export default UserProvider
+
+// const UserProvider: React.FC<UserProviderProps> = ({ children, value }) => {
+//   const [user, setUser] = useState<User>(value.user)
+//   const [watchLaterData, setWatchLaterData] = useState<WatchLaterData[]>(value.watchLaterData) // Update this line
+
+//   return (
+//     <UserContext.Provider value={{ user, setUser, watchLaterData, setWatchLaterData }}>{children}</UserContext.Provider>
+//   )
+// }
