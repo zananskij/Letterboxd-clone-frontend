@@ -55,6 +55,7 @@ import { Link } from "react-router-dom"
 import { UserIcon } from "@heroicons/react/24/solid"
 import { UserContext } from "../context"
 import { Link as ScrollLink } from "react-scroll"
+import SearchBar from "./SearchBar"
 
 const Header = () => {
   const [scroll, setScroll] = useState(false)
@@ -88,6 +89,7 @@ const Header = () => {
               Watch Later
             </ScrollLink>
           </li>
+          <SearchBar />
           {/* Uncomment these lines if you have the relevant pages
             <li className="text-white text-lg hover:text-gray-300 hover:underline">
               <Link to="/categories">
