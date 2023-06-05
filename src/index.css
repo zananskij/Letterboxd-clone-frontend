@@ -136,7 +136,9 @@ box-icon {
 }
 
 /* modal */
-.modal-overlay {
+
+/* old modal styling */
+/* .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -147,17 +149,69 @@ box-icon {
   align-items: center;
   justify-content: center;
   z-index: 1;
-}
+} */
 
-.modal-content {
+/* .modal-content {
   background-color: rgba(10, 8, 8, 0.9);
   padding: 1rem;
   border-radius: 0.5rem;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 14px 24px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.5);
   overflow-y: auto;
+  animation: fadeIn 0.5s;
+} */
+/* old modal styling */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
 }
 
-.modal-btn {
+.modal-content {
+  width: 90%; /* You can change this to whatever you prefer */
+  max-width: 800px; /* This is the maximum width the modal can have */
+  background-color: rgba(10, 8, 8, 0.9);
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  overflow-y: auto;
+  color: #fff;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.modal-content .text-4xl {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.modal-content .text-1xl {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.modal-content .text-2xl {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+/* old btn styling */
+/* .modal-btn {
   height: 55px;
   width: 70px;
   border-radius: 15%;
@@ -165,4 +219,127 @@ box-icon {
   background-color: red;
   font-size: 10px;
   padding: 2%;
+  transition: background-color 0.3s ease;
+}
+
+.modal-btn:hover {
+  background-color: darkred;
+} */
+/* old btn styling */
+
+.modal-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 0 24px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+  position: relative;
+  background: linear-gradient(90deg, rgba(229, 9, 20, 1) 0%, rgba(255, 82, 82, 1) 100%);
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+  overflow: hidden;
+  outline: none;
+  margin-right: 12px;
+  text-decoration: none;
+}
+
+.modal-btn::before {
+  content: "";
+  display: block;
+  position: absolute;
+  background: rgba(255, 255, 255, 0.2);
+  width: 60px;
+  height: 100%;
+  left: -50px;
+  top: 0;
+  transform: skewX(-20deg) translateX(70px);
+  transition: transform 0.3s ease-in-out;
+}
+
+.modal-btn:hover {
+  transform: scale(1.05);
+}
+
+.modal-btn:hover::before {
+  transform: skewX(-20deg) translateX(300px);
+}
+
+/* header updates for styling  */
+.transition-colors {
+  transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter,
+    backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.text-shadow {
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5), 3px 3px 5px rgba(0, 0, 0, 0.7);
+}
+
+.social-icons a:hover .social-media-icon {
+  fill: #0279ff;
+}
+
+/* Shiny Button Effect */
+.shiny-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  padding: 0 24px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+  position: relative;
+  background: linear-gradient(90deg, rgba(229, 9, 20, 1) 0%, rgba(255, 82, 82, 1) 100%);
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+  overflow: hidden;
+  outline: none;
+  text-decoration: none;
+  margin-right: 12px;
+}
+
+.shiny-button::before {
+  content: "";
+  display: block;
+  position: absolute;
+  background: rgba(255, 255, 255, 0.2);
+  width: 60px;
+  height: 100%;
+  left: -50px;
+  top: 0;
+  transform: skewX(-20deg) translateX(70px);
+  transition: transform 0.3s ease-in-out;
+}
+
+.shiny-button:hover {
+  transform: scale(1.05);
+}
+
+.shiny-button:hover::before {
+  transform: skewX(-20deg) translateX(230px);
+}
+
+.shiny-button-blue {
+  background: linear-gradient(90deg, rgba(13, 110, 253, 1) 0%, rgba(17, 138, 178, 1) 100%);
+}
+
+.shiny-button-green {
+  background: linear-gradient(90deg, rgba(16, 185, 129, 1) 0%, rgba(5, 150, 105, 1) 100%);
+}
+
+.more-info {
+  height: 30px;
+  border-radius: 10px;
+  font-size: 12px;
 }
