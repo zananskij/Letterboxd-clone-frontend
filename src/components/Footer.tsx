@@ -1,30 +1,3 @@
-// import { SocialIcon } from "react-social-icons"
-// const Footer = () => (
-//   <footer className="py-6 bg-white text-black text-center text-sm space-y-4">
-//     <div className="footer-links space-x-4">
-//       <a href="#">About Us</a>
-//       <a href="#">Help Center</a>
-//       <a href="#">Jobs</a>
-//       <a href="#">Terms of Service</a>
-//       <a href="#">Privacy Policy</a>
-//       <a href="#">Contact Us</a>
-//     </div>
-//     <div className="social-icons space-x-4">
-//       <a href="#">
-//         <SocialIcon network="facebook" bgColor="#ff5a01" />
-//       </a>
-//       <a href="#">
-//         <SocialIcon network="twitter" bgColor="#ff5a01" />
-//       </a>
-//       <a href="#">
-//         <SocialIcon network="instagram" bgColor="#ff5a01" />
-//       </a>
-//     </div>
-//     &copy; 2023 Your Streaming Service. All rights reserved.
-//   </footer>
-// )
-
-// export default Footer
 import { useState } from "react"
 import { SocialIcon } from "react-social-icons"
 

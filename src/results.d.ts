@@ -263,6 +263,7 @@ export interface MediaData {
   poster_path: string
   vote_average: number
   vote_count: number
+  trailerUrl: string | null
 }
 
 // Movie = MediaData

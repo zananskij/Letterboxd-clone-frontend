@@ -68,10 +68,10 @@ function Banner({ Data }: Props) {
 
   return (
     <div
-      className="relative py-12 bg-cover bg-center bg-no-repeat lg:h-[65vh] lg:py-12 bg-black"
+      className="relative py-2 bg-cover bg-center bg-no-repeat lg:h-[65vh] lg:py-12 bg-black"
       style={{ backgroundImage: `url(${baseURL}${movie?.backdrop_path || movie?.poster_path})` }}
     >
-      <div className="banner-description relative px-8 py-4 space-y-4 lg:space-y-6 lg:px-16 bg-transparent hover:bg-black hover:bg-opacity-50 rounded-md transition-all duration-500 ease-in-out">
+      <div className="banner-description relative px-8 py-4 pt-12 space-y-4 lg:space-y-6 lg:px-16 bg-transparent hover:bg-black hover:bg-opacity-50 rounded-md transition-all duration-500 ease-in-out">
         <h1 className="text-2xl font-bold text-white md:text-4xl lg:text-6xl text-shadow">
           {movie?.title || movie?.name || movie?.original_name}
         </h1>
@@ -93,8 +93,3 @@ function Banner({ Data }: Props) {
 }
 
 export default Banner
-
-// before adding the semi background back
-// before adding the semi background back
-// before adding the semi background back
-// before adding the semi background back

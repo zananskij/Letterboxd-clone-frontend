@@ -51,8 +51,13 @@ span {
   justify-content: center;
   color: white;
   font-size: medium;
-  padding: 10px 0 10px 0;
-  margin-top: 10px;
+  /* padding: 10px 0 10px 0;
+  margin-top: 10px; */
+}
+
+.modal-span {
+  margin-top: 0px;
+  padding: 0px;
 }
 
 a {
@@ -342,4 +347,110 @@ box-icon {
   height: 30px;
   border-radius: 10px;
   font-size: 12px;
+}
+
+.modal-overlay {
+  padding-top: 60px; /* Adjust this value according to the height of your Header */
+  /* rest of your styles */
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Default styles for larger screens */
+.header-text {
+  font-size: 16px;
+}
+
+.user-icon {
+  width: 48px;
+  height: 48px;
+}
+
+.search-input {
+  width: 200px;
+}
+
+/* Adjusted styles for screens less than 768px wide */
+@media (max-width: 768px) {
+  .header-text {
+    font-size: 12px;
+  }
+
+  .user-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .search-input {
+    width: 100px;
+  }
+
+  .text-sm {
+    font-size: 18px;
+  }
+}
+.header-text {
+  font-size: 1.25rem; /* 20px */
+}
+
+.user-icon {
+  width: 1.75rem; /* 28px */
+  height: 1.75rem; /* 28px */
+}
+
+.search-input {
+  width: 200px;
+}
+
+@media (max-width: 768px) {
+  .header-text {
+    font-size: 1rem; /* 16px */
+  }
+
+  .user-icon {
+    width: 1.5rem; /* 24px */
+    height: 1.5rem; /* 24px */
+  }
+
+  .search-input {
+    width: 100px;
+  }
+}
+.search-input-field {
+  width: 200px; /* adjust as needed */
+}
+
+@media (max-width: 768px) {
+  .search-input-field {
+    width: 100px; /* adjust as needed */
+  }
+}
+
+@media (min-width: 1024px) {
+  .user-icon {
+    margin-left: 2rem; /* adjust as needed */
+  }
+
+  .header-text {
+    margin-right: 2rem; /* adjust as needed */
+    margin-left: 2rem; /* adjust as needed */
+  }
+
+  .search-input {
+    margin-left: 0rem; /* adjust as needed */
+  }
+}
+
+@media (min-width: 1024px) {
+  .user-icon {
+    margin-right: 2rem; /* adjust as needed */
+  }
+
+  .search-input {
+    margin-left: 2rem; /* adjust as needed */
+  }
 }

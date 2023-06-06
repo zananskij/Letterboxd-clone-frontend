@@ -112,7 +112,7 @@ const Card: React.FC<Props> = ({ item }) => {
 
         if (response.status === 200) {
           setWatchLaterData([...watchLaterData, data])
-          console.log("Watch later context data: ", watchLaterData) // Add this line 3
+          console.log("Watch later context data: ", watchLaterData)
         }
       } catch (error) {
         console.log(error)

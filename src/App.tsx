@@ -43,6 +43,7 @@ const App = () => {
   const [error, setError] = useState<string | null>(null)
   const [watchLaterData, setWatchLaterData] = useState<WatchLaterData[]>([])
   const [mediaData, setMediaData] = useState([])
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const navigate = useNavigate()
 
@@ -116,7 +117,7 @@ const App = () => {
 
   return (
     <UserProvider value={{ user, setUser, watchLaterData, setWatchLaterData }}>
-      {showHeader && <Header />}
+      {showHeader && !isModalOpen && <Header />}
       <Routes>
         <Route path="/" element={<Main Data={data} watchLaterData={watchLaterData} mediaData={mediaData} />} />
         <Route path="/login" element={<Login />} />

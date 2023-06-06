@@ -50,53 +50,6 @@ const Login: React.FC = () => {
     } catch (error) {}
   }
 
-  //   return (
-  //     <div className="login-page">
-  //       <div className="login-container">
-  //         <h3>Login</h3>
-  //         <div className="login-form">
-  //           <form onSubmit={handleSubmit}>
-  //             <input
-  //               type="text"
-  //               name="username"
-  //               value={user.username}
-  //               placeholder="Username"
-  //               required
-  //               onChange={handleChange}
-  //             />
-
-  //             <br />
-  //             <br />
-  //             <input
-  //               type="password"
-  //               name="password"
-  //               value={user.password}
-  //               placeholder="Password"
-  //               required
-  //               onChange={handleChange}
-  //             />
-
-  //             <br />
-  //             <div className="options-container">
-  //               <button type="submit" className="login-btn">
-  //                 Login
-  //               </button>
-  //               <span>
-  //                 Don't have an account?
-  //                 <button className="cursor-pointer text-white hover:underline" onClick={() => navigate("/register")}>
-  //                   Sign up!
-  //                 </button>
-  //               </span>
-  //             </div>
-  //           </form>
-  //         </div>
-  //       </div>
-  //     </div>
-  //   )
-  // }
-
-  // export default Login
-
   return (
     <div className="flex flex-col justify-center items-center h-screen bg-gradient-to-b from-gray-900/10 to-[#010511] text-white">
       <div className="w-96 bg-gray-800 p-10 rounded-xl shadow-lg">
