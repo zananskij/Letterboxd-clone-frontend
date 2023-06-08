@@ -22,7 +22,8 @@ const Login: React.FC = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     try {
-      const { data } = await axios.post("http://localhost:8000/login", user)
+      // const { data } = await axios.post("http://localhost:8000/login", user)
+      const { data } = await axios.post("https://letterboxd-clone-backend.herokuapp.com/login", user)
       localStorage.setItem("token", data.token)
       console.log(`userId: ${data.user.id}`)
       console.log(`username: ${data.user.username}`)
@@ -36,7 +37,8 @@ const Login: React.FC = () => {
 
       // Fetch the watch later data for the user after successful login
       axios
-        .get(`http://localhost:8000/users/${data.user.username}/watchlater`)
+        // .get(`http://localhost:8000/users/${data.user.username}/watchlater`)
+        .get(`https://letterboxd-clone-backend.herokuapp.com/users/${data.user.username}/watchlater`)
         .then((response) => {
           console.log("Watch later response data: ", response.data) // Add this line
           setWatchLaterData(response.data) // Please ensure that you have defined setWatchLaterData in your context and imported it here.

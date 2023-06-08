@@ -40,7 +40,8 @@ const SearchBar: React.FC = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     try {
-      const response = await axios.get(`http://localhost:8000/search/${searchTerm}`)
+      //   const response = await axios.get(`http://localhost:8000/search/${searchTerm}`)
+      const response = await axios.get(`https://letterboxd-clone-backend.herokuapp.com/search/${searchTerm}`)
       const results = response.data.results
       results.sort((a: SearchResult, b: SearchResult) => b.popularity - a.popularity)
       const topResults = results.slice(0, 5)

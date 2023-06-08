@@ -76,7 +76,8 @@ const App = () => {
   useEffect(() => {
     axios
       // .get("https://letterboxd-clone-backend.herokuapp.com/")
-      .get("http://localhost:8000/")
+      // .get("http://localhost:8000/")
+      .get("https://letterboxd-clone-backend.herokuapp.com/")
       .then((response) => {
         console.log(response)
         setData({

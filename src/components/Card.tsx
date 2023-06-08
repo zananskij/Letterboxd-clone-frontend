@@ -108,7 +108,11 @@ const Card: React.FC<Props> = ({ item }) => {
     if (user && user.id !== null) {
       try {
         const data = { media_id: item.id, user_id: user.id }
-        const response = await axios.post(`http://localhost:8000/users/${user.username}/watchlater`, data)
+        // const response = await axios.post(`http://localhost:8000/users/${user.username}/watchlater`, data)
+        const response = await axios.post(
+          `https://letterboxd-clone-backend.herokuapp.com/users/${user.username}/watchlater`,
+          data
+        )
 
         if (response.status === 200) {
           setWatchLaterData([...watchLaterData, data])
