@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repository contains the frontend of my Streaming Backlist application, designed with React and TypeScript for a dynamic, user-centric experience. It works in conjunction with a backend, constructed with Express and PostgreSQL, that handles data from external APIs and user-specific information in the database. Together, they deliver a personalized platform where users can effortlessly manage their Favorites and Watchlater lists, creating a uniquely engaging experience for every user."
+This repository contains the frontend code for my Streaming Backlist application, which provides a user-centric and dynamic streaming experience. The frontend is built using React and TypeScript, leveraging React's component-based architecture to create reusable UI components and manage application state effectively. The app integrates seamlessly with the backend, which is constructed with Express and PostgreSQL, enabling the handling of data from external APIs and user-specific information in the database. Together, the frontend and backend deliver a personalized platform where users can effortlessly search and manage their Favorites and Watchlater lists, creating a uniquely engaging experience for every user.
 
 ## Live Link
 
