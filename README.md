@@ -6,22 +6,22 @@ This repository contains the frontend of my Streaming Backlist application, desi
 
 ## Live Link
 
-https://letterboxd-clone-frontend.herokuapp.com/
+https://letterboxd-clone.herokuapp.com/
 
 ## Skills Utilized (Frontend)
 
 - React
 - TypeScript
-- React Router
+- React Router / DOM
 - Axios
 - Tailwind CSS
 
 ## Key Features
 
 - Dynamic UI & User Management: An intuitive frontend interface where users can search, view, and manage media and their personal information post-registration/login.
-- Backend Communication & API Integration: Seamlessly interacts with the backend via Axios for data fetching/updating, and with external APIs (e.g., TMDb) for media information.
+- Backend Communication & API Integration: Seamlessly interacts with the backend via Axios for data fetching/updating, and with external APIs (TMDb API) for media information.
 - List Management: Users can readily view and manage their 'Watched' list directly from the interface.
-- Database Integration: Interfaces with a PostgreSQL database for storing and retrieving user and media data.
+- Database Integration: Interfaces with a PostgreSQL database for storing and retrieving user and media data, unique to each user.
 - Search Functionality: Enables media retrieval based on user-defined search terms.
 - Mobile Responsiveness: Ensures seamless, responsive UI across different device sizes using Tailwind CSS.
 
