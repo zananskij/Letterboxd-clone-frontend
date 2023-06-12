@@ -1,46 +1,33 @@
-# Getting Started with Create React App
+# Streaming Backlist - Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+This repository contains the frontend of my Streaming Backlist application, designed with React and TypeScript for a dynamic, user-centric experience. It works in conjunction with a backend, constructed with Express and PostgreSQL, that handles data from external APIs and user-specific information in the database. Together, they deliver a personalized platform where users can effortlessly manage their Favorites and Watchlater lists, creating a uniquely engaging experience for every user."
 
-In the project directory, you can run:
+## Live Link
 
-### `npm start`
+https://letterboxd-clone-frontend.herokuapp.com/
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Skills Utilized (Frontend)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- React
+- TypeScript
+- React Router
+- Axios
+- Tailwind CSS
 
-### `npm test`
+## Key Features
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Dynamic UI & User Management: An intuitive frontend interface where users can search, view, and manage media and their personal information post-registration/login.
+- Backend Communication & API Integration: Seamlessly interacts with the backend via Axios for data fetching/updating, and with external APIs (e.g., TMDb) for media information.
+- List Management: Users can readily view and manage their 'Watched' list directly from the interface.
+- Database Integration: Interfaces with a PostgreSQL database for storing and retrieving user and media data.
+- Search Functionality: Enables media retrieval based on user-defined search terms.
+- Mobile Responsiveness: Ensures seamless, responsive UI across different device sizes using Tailwind CSS.
 
-### `npm run build`
+## Contact me!
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Please feel free to explore the code and reach out if you have any questions or feedback!
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- https://jonzananski.herokuapp.com/
+- https://www.linkedin.com/in/zananskij/

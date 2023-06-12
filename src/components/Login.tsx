@@ -18,7 +18,7 @@ const Login: React.FC = () => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, [event.target.name]: event.target.value })
   }
-  // worked but advised to revise
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     try {
@@ -32,7 +32,7 @@ const Login: React.FC = () => {
       setUser({
         id: data.user.id,
         username: data.user.username,
-        password: data.user.password, // It's not recommended to store the password in the context. I'll elaborate on this below.
+        password: data.user.password,
       })
 
       // Fetch the watch later data for the user after successful login
@@ -40,9 +40,9 @@ const Login: React.FC = () => {
         // .get(`http://localhost:8000/users/${data.user.username}/watchlater`)
         .get(`https://letterboxd-clone-backend.herokuapp.com/users/${data.user.username}/watchlater`)
         .then((response) => {
-          console.log("Watch later response data: ", response.data) // Add this line
-          setWatchLaterData(response.data) // Please ensure that you have defined setWatchLaterData in your context and imported it here.
-          console.log("Watch later state data: ", watchLaterData) // Add this line
+          console.log("Watch later response data: ", response.data)
+          setWatchLaterData(response.data)
+          console.log("Watch later state data: ", watchLaterData)
         })
         .catch((error) => {
           console.error("Error fetching watch later data: ", error)

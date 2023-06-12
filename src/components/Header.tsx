@@ -54,28 +54,3 @@ const Header = () => {
 }
 
 export default Header
-
-// return (
-//   <header className={`${scroll && "bg-black transition-colors duration-200 ease-in-out"} py-4 px-8 sm:px-16`}>
-//     <div className="flex justify-between items-center space-x-2 md:space-x-10">
-//       <ul className="space-x-4 sm:flex">
-//         <li className="text-white text-shadow text-lg hover:text-blue-400 hover:underline">
-//           <ScrollLink to="home" smooth={true} duration={500}>
-//             Home
-//           </ScrollLink>
-//         </li>
-//         <li className="text-white text-shadow text-lg hover:text-blue-400 hover:underline">
-//           <ScrollLink to="watchLater" smooth={true} duration={500}>
-//             Watch Later
-//           </ScrollLink>
-//         </li>
-//         <SearchBar />
-//       </ul>
-//       <div className="flex items-center space-x-4">
-//         <Link to={user?.username ? "/login" : "/register"}>
-//           <UserIcon className="h-7 w-7 text-white text-shadow hover:text-blue-400 hover:scale-105 transition-transform" />
-//         </Link>
-//       </div>
-//     </div>
-//   </header>
-// )
