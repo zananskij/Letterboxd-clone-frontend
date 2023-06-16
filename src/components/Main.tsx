@@ -60,19 +60,19 @@ const Main: React.FC<MainProps> = ({ Data, watchLaterData, mediaData }) => {
             data={{ page: 1, data: Data.trending.data }}
             render={(item) => <Card item={item} />}
           />
-
-          <Row
-            title="Netflix Originals"
-            data={{ page: 1, data: Data.netflixOriginals.data }}
-            render={(item) => <Card item={item} />}
-          />
           <Row title="Top Rated" data={{ page: 1, data: Data.topRated.data }} render={(item) => <Card item={item} />} />
+
           <Row title="Horror" data={{ page: 1, data: Data.horror.data }} render={(item) => <Card item={item} />} />
           <Row title="Comedy" data={{ page: 1, data: Data.comedy.data }} render={(item) => <Card item={item} />} />
           <Row title="Action" data={{ page: 1, data: Data.action.data }} render={(item) => <Card item={item} />} />
           <Row
             title="Documentaries"
             data={{ page: 1, data: Data.documentaries.data }}
+            render={(item) => <Card item={item} />}
+          />
+          <Row
+            title="Originals"
+            data={{ page: 1, data: Data.netflixOriginals.data }}
             render={(item) => <Card item={item} />}
           />
           <ScrollElement name="watchLater">
