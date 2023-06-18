@@ -35,7 +35,7 @@ const Main: React.FC<MainProps> = ({ Data, watchLaterData, mediaData }) => {
   useEffect(() => {
     const fetchWatchLaterDetails = async () => {
       const detailedDataPromises = watchLaterData.map(async (watchLaterItem) => {
-        // Replace the URL with your media service URL
+        // Replace the URL with your media service URLL
         const response = await axios.get(
           `https://api.themoviedb.org/3/movie/${watchLaterItem.media_id}?api_key=5362af18e253afee869b7687fe3b6941`
         )
